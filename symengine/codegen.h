@@ -147,11 +147,7 @@ public:
     void bvisit(const Derivative &x)
     {
 
-
-
-
-    
-                                                throw SymEngineException("Not supported");
+        throw SymEngineException("Not supported");
     }
     void bvisit(const Subs &x)
     {
