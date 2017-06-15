@@ -301,6 +301,9 @@ public:
     ImageSet(const RCP<const Basic> &sym, const RCP<const Basic> &expr,
              const RCP<const Set> &base);
 
+    static bool is_canonical(const RCP<const Basic> &sym,
+                             const RCP<const Basic> &expr,
+                             const RCP<const Set> &base);
     virtual RCP<const Set> set_intersection(const RCP<const Set> &o) const;
     virtual RCP<const Set> set_union(const RCP<const Set> &o) const;
     virtual RCP<const Set> set_complement(const RCP<const Set> &o) const;
@@ -367,6 +370,9 @@ inline RCP<const Set> imageset(const RCP<const Basic> &sym,
                                const RCP<const Basic> &expr,
                                const RCP<const Set> &base)
 {
+    if (not is_a<Symbol>(*sym))
+        throw SymEngineException("first arg is expected to be a symbol");
+
     if (eq(*expr, *sym))
         return base;
 
