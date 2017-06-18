@@ -666,7 +666,16 @@ TEST_CASE("ConditionSet : Basic", "[basic]")
 
     r1 = conditionset(x, logical_and({cond2, i1->contains(x)}));
     REQUIRE(is_a<ConditionSet>(*r1));
-    REQUIRE(eq(*r1->contains(pi), *logical_and({Le(pi,zero),i1->contains(pi)}))); // pi can't be compared with zero now. remains unevaluated as And(pi <= 0, Contains(pi, (-oo, oo)))
+    REQUIRE(eq(*r1->contains(pi),
+               *logical_and({Le(pi, zero), i1->contains(pi)}))); // pi can't be
+                                                                 // compared
+                                                                 // with zero
+                                                                 // now. remains
+                                                                 // unevaluated
+                                                                 // as And(pi <=
+                                                                 // 0,
+                                                                 // Contains(pi,
+                                                                 // (-oo, oo)))
     REQUIRE(eq(*r1->contains(integer(2)), *boolFalse));
     REQUIRE(eq(*r1->contains(integer(-2)), *boolTrue));
 
