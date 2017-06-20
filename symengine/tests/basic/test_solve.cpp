@@ -168,12 +168,12 @@ TEST_CASE("test_solve", "[Solve]")
 
     // Quartic
     poly = qx;
-    soln = solve(poly,x);
-    REQUIRE(eq(*soln,*finiteset({zero})));
+    soln = solve(poly, x);
+    REQUIRE(eq(*soln, *finiteset({zero})));
 
-    poly = add(qx,cbx);
-    soln = solve(poly,x);
-    REQUIRE(eq(*soln,*finiteset({zero,neg(one)})));
+    poly = add(qx, cbx);
+    soln = solve(poly, x);
+    REQUIRE(eq(*soln, *finiteset({zero, neg(one)})));
 
     poly = add({qx, mul(cbx, i2), mul(integer(-41), sqx), mul(x, integer(-42)),
                 integer(360)});
