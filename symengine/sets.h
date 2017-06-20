@@ -328,7 +328,8 @@ inline bool is_a_Set(const Basic &b)
     return (b.get_type_code() == EMPTYSET || b.get_type_code() == UNIVERSALSET
             || b.get_type_code() == FINITESET || b.get_type_code() == COMPLEMENT
             || b.get_type_code() == CONDITIONSET
-            || b.get_type_code() == INTERVAL || b.get_type_code() == UNION || b.get_type_code() == IMAGESET);
+            || b.get_type_code() == INTERVAL || b.get_type_code() == UNION
+            || b.get_type_code() == IMAGESET);
 }
 
 //! \return RCP<const EmptySet>
