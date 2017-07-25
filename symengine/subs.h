@@ -177,7 +177,8 @@ public:
         if (not is_a_Set(*bs_))
             throw SymEngineException("expected an object of type Set");
         RCP<const Set> bs = rcp_static_cast<const Set>(bs_);
-        if (s == x.get_symbol() and expr == x.get_expr() and bs == x.get_baseset()) {
+        if (s == x.get_symbol() and expr == x.get_expr()
+            and bs == x.get_baseset()) {
             result_ = x.rcp_from_this();
         } else {
             result_ = x.create(s, expr, bs);

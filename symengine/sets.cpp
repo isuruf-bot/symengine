@@ -824,7 +824,6 @@ RCP<const Set> ImageSet::set_complement(const RCP<const Set> &o) const
     return SymEngine::set_complement(rcp_from_this_cast<const Set>(), o);
 }
 
-
 RCP<const Set> ImageSet::create(const RCP<const Basic> &sym,
                                 const RCP<const Basic> &expr,
                                 const RCP<const Set> &base) const

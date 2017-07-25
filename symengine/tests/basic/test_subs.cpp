@@ -469,12 +469,9 @@ TEST_CASE("Sets: subs", "[subs]")
     RCP<const Basic> i2 = integer(2);
     auto interval1 = interval(integer(-2), integer(2));
 
-    RCP<const Set> r1
-        = imageset(x, mul(x, x), interval1);
-    RCP<const Set> r2
-        = imageset(y, mul(y, y), interval1);
-    RCP<const Set> r3
-        = imageset(n, mul(n, n), interval1);
+    RCP<const Set> r1 = imageset(x, mul(x, x), interval1);
+    RCP<const Set> r2 = imageset(y, mul(y, y), interval1);
+    RCP<const Set> r3 = imageset(n, mul(n, n), interval1);
 
     map_basic_basic d;
     d[x] = y;
