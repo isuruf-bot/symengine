@@ -142,8 +142,7 @@ public:
         SYMENGINE_ASSIGN_TYPEID()
     }
 
-    IMPLEMENT_TYPEID(NUMBER_WRAPPER)
-    virtual std::string __str__() const
+    IMPLEMENT_TYPEID(NUMBER_WRAPPER) virtual std::string __str__() const
     {
         throw NotImplementedError("Not Implemented.");
     };

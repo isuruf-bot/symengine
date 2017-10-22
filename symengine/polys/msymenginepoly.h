@@ -465,8 +465,7 @@ public:
         SYMENGINE_ASSIGN_TYPEID()
     }
 
-    IMPLEMENT_TYPEID(MINTPOLY)
-    hash_t __hash__() const;
+    IMPLEMENT_TYPEID(MINTPOLY) hash_t __hash__() const;
     RCP<const Basic> as_symbolic() const;
 
     integer_class eval(
@@ -482,8 +481,7 @@ public:
         SYMENGINE_ASSIGN_TYPEID()
     }
 
-    IMPLEMENT_TYPEID(MEXPRPOLY)
-    hash_t __hash__() const;
+    IMPLEMENT_TYPEID(MEXPRPOLY) hash_t __hash__() const;
     RCP<const Basic> as_symbolic() const;
     Expression
     eval(std::map<RCP<const Basic>, Expression, RCPBasicKeyLess> &vals) const;
