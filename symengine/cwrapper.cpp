@@ -492,6 +492,13 @@ CWRAPPER_OUTPUT_TYPE basic_parse(basic b, const char *str)
     CWRAPPER_END
 }
 
+CWRAPPER_OUTPUT_TYPE basic_parse2(basic b, const char *str)
+{
+    CWRAPPER_BEGIN
+    b->m = SymEngine::parse(str, false);
+    CWRAPPER_END
+}
+
 CWRAPPER_OUTPUT_TYPE basic_add(basic s, const basic a, const basic b)
 {
     CWRAPPER_BEGIN
