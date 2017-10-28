@@ -8,8 +8,7 @@
 
 #include <symengine/basic.h>
 
-namespace SymEngine
-{
+namespace SymEngine {
 
 //! Converts expression `p` into a polynomial `P`, with symbols `sym`
 void expr2poly(const RCP<const Basic> &p, umap_basic_num &syms,

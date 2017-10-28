@@ -23,28 +23,25 @@ using SymEngine::series;
 using SymEngine::rcp_dynamic_cast;
 using SymEngine::integer;
 
-int main(int argc, char *argv[])
-{
-    SymEngine::print_stack_on_segfault();
+int main(int argc, char *argv[]) {
+  SymEngine::print_stack_on_segfault();
 
-    RCP<const Symbol> x = symbol("x");
-    int N = 100;
-    auto ex = sin(cos(add(x, integer(1))));
+  RCP<const Symbol> x = symbol("x");
+  int N = 100;
+  auto ex = sin(cos(add(x, integer(1))));
 
-    auto t1 = std::chrono::high_resolution_clock::now();
-    auto ex1 = UPSeriesPiranha::series(ex, "x", N);
-    auto t2 = std::chrono::high_resolution_clock::now();
-    // std::cout << *res[N-1] << std::endl;
-    std::cout << std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1)
-                     .count()
-              << "ms" << std::endl;
+  auto t1 = std::chrono::high_resolution_clock::now();
+  auto ex1 = UPSeriesPiranha::series(ex, "x", N);
+  auto t2 = std::chrono::high_resolution_clock::now();
+  // std::cout << *res[N-1] << std::endl;
+  std::cout << std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1)
+                   .count()
+            << "ms" << std::endl;
 
-    return 0;
+  return 0;
 }
 #else
 
-int main(int, char *[])
-{
-}
+int main(int, char *[]) {}
 
 #endif

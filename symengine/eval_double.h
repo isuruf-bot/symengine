@@ -7,8 +7,7 @@
 
 #include <symengine/basic.h>
 
-namespace SymEngine
-{
+namespace SymEngine {
 
 /*
  * We have two implementations, the visitor pattern (eval_double) and

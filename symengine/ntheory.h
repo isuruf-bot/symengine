@@ -9,8 +9,7 @@
 
 #include <symengine/integer.h>
 
-namespace SymEngine
-{
+namespace SymEngine {
 
 // Prime Functions
 //! Probabilistic Prime
@@ -107,48 +106,46 @@ void prime_factor_multiplicities(map_integer_uint &primes, const Integer &n);
 // should
 // be quite optimized. For limit=1e8, it is about 20x slower than the
 // `primesieve` library (1206ms vs 55.63ms).
-class Sieve
-{
+class Sieve {
 
 private:
-    static std::vector<unsigned> _primes;
-    static void _extend(unsigned limit);
-    static unsigned _sieve_size;
-    static bool _clear;
+  static std::vector<unsigned> _primes;
+  static void _extend(unsigned limit);
+  static unsigned _sieve_size;
+  static bool _clear;
 
 public:
-    // Returns all primes up to the `limit` (including). The vector `primes`
-    // should
-    // be empty on input and it will be filled with the primes.
-    //! \param primes: holds all primes up to the `limit` (including).
-    static void generate_primes(std::vector<unsigned> &primes, unsigned limit);
-    // Clear the array of primes stored
-    static void clear();
-    // Set the sieve size in kilobytes. Set it to L1d cache size for best
-    // performance.
-    // Default value is 32.
-    static void set_sieve_size(unsigned size);
-    // Set whether the sieve is cleared after the sieve is extended in internal
-    // functions
-    static void set_clear(bool clear);
+  // Returns all primes up to the `limit` (including). The vector `primes`
+  // should
+  // be empty on input and it will be filled with the primes.
+  //! \param primes: holds all primes up to the `limit` (including).
+  static void generate_primes(std::vector<unsigned> &primes, unsigned limit);
+  // Clear the array of primes stored
+  static void clear();
+  // Set the sieve size in kilobytes. Set it to L1d cache size for best
+  // performance.
+  // Default value is 32.
+  static void set_sieve_size(unsigned size);
+  // Set whether the sieve is cleared after the sieve is extended in internal
+  // functions
+  static void set_clear(bool clear);
 
-    class iterator
-    {
+  class iterator {
 
-    private:
-        unsigned _index;
-        unsigned _limit;
+  private:
+    unsigned _index;
+    unsigned _limit;
 
-    public:
-        // Iterator that generates primes upto limit
-        iterator(unsigned limit);
-        // Iterator that generates primes with no limit.
-        iterator();
-        // Destructor
-        ~iterator();
-        // Next prime
-        unsigned next_prime();
-    };
+  public:
+    // Iterator that generates primes upto limit
+    iterator(unsigned limit);
+    // Iterator that generates primes with no limit.
+    iterator();
+    // Destructor
+    ~iterator();
+    // Next prime
+    unsigned next_prime();
+  };
 };
 
 //! Computes the Bernoulli number Bn as an exact fraction, for an isolated

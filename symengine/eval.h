@@ -17,8 +17,7 @@
 #include <mpc.h>
 #endif // HAVE_SYMENGINE_MPC
 
-namespace SymEngine
-{
+namespace SymEngine {
 
 /*
  * Evaluates basic b, according to the number of significant bits, and the

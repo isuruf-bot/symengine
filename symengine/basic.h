@@ -32,8 +32,7 @@
 #include <symengine/dict.h>
 
 //! Main namespace for SymEngine package
-namespace SymEngine
-{
+namespace SymEngine {
 
 enum TypeID {
 #define SYMENGINE_INCLUDE_ALL
@@ -41,10 +40,10 @@ enum TypeID {
 #include "symengine/type_codes.inc"
 #undef SYMENGINE_ENUM
 #undef SYMENGINE_INCLUDE_ALL
-    // The 'TypeID_Count' returns the number of elements in 'TypeID'. For this
-    // to work, do not assign numbers to the elements above (or if you do, you
-    // must assign the correct count below).
-    TypeID_Count
+  // The 'TypeID_Count' returns the number of elements in 'TypeID'. For this
+  // to work, do not assign numbers to the elements above (or if you do, you
+  // must assign the correct count below).
+  TypeID_Count
 };
 
 #include "basic-methods.inc"
@@ -84,8 +83,7 @@ class Symbol;
 
 */
 
-class Basic : public EnableRCPFromThis<Basic>
-{
+class Basic : public EnableRCPFromThis<Basic> {
 private:
 //! Private variables
 // The hash_ is defined as mutable, because its value is initialized to 0
@@ -93,128 +91,115 @@ private:
 // current hash (which is always the same for the given instance). The
 // state of the instance does not change, so we define hash_ as mutable.
 #if defined(WITH_SYMENGINE_THREAD_SAFE)
-    mutable std::atomic<hash_t> hash_; // This holds the hash value
+  mutable std::atomic<hash_t> hash_; // This holds the hash value
 #else
-    mutable hash_t hash_; // This holds the hash value
+  mutable hash_t hash_; // This holds the hash value
 #endif // WITH_SYMENGINE_THREAD_SAFE
 public:
 #ifdef WITH_SYMENGINE_VIRTUAL_TYPEID
-    virtual TypeID get_type_code() const = 0;
+  virtual TypeID get_type_code() const = 0;
 #else
-    TypeID type_code_;
-    inline TypeID get_type_code() const
-    {
-        return type_code_;
-    };
+  TypeID type_code_;
+  inline TypeID get_type_code() const { return type_code_; };
 #endif
-    //! Constructor
-    Basic() : hash_{0}
-    {
-    }
-    // Destructor must be explicitly defined as virtual here to avoid problems
-    // with undefined behavior while deallocating derived classes.
-    virtual ~Basic()
-    {
-    }
+  //! Constructor
+  Basic() : hash_{0} {}
+  // Destructor must be explicitly defined as virtual here to avoid problems
+  // with undefined behavior while deallocating derived classes.
+  virtual ~Basic() {}
 
-    //! Delete the copy constructor and assignment
-    Basic(const Basic &) = delete;
-    //! Assignment operator in continuation with above
-    Basic &operator=(const Basic &) = delete;
+  //! Delete the copy constructor and assignment
+  Basic(const Basic &) = delete;
+  //! Assignment operator in continuation with above
+  Basic &operator=(const Basic &) = delete;
 
-    //! Delete the move constructor and assignment
-    Basic(Basic &&) = delete;
-    //! Assignment operator in continuation with above
-    Basic &operator=(Basic &&) = delete;
+  //! Delete the move constructor and assignment
+  Basic(Basic &&) = delete;
+  //! Assignment operator in continuation with above
+  Basic &operator=(Basic &&) = delete;
 
-    /*!
-        Calculates the hash of the given SymEngine class.
-        Use Basic.hash() which gives a cached version of the hash.
-        \return 64-bit integer value for the hash
-    */
-    virtual hash_t __hash__() const = 0;
+  /*!
+      Calculates the hash of the given SymEngine class.
+      Use Basic.hash() which gives a cached version of the hash.
+      \return 64-bit integer value for the hash
+  */
+  virtual hash_t __hash__() const = 0;
 
-    /*! Returns the hash of the SymEngine class:
-        This method caches the value
+  /*! Returns the hash of the SymEngine class:
+      This method caches the value
 
-        Use `std::hash` to get the hash. Example:
+      Use `std::hash` to get the hash. Example:
 
-             RCP<const Symbol> x = symbol("x");
-             std::hash<Basic> hash_fn;
-             std::cout << hash_fn(*x);
+           RCP<const Symbol> x = symbol("x");
+           std::hash<Basic> hash_fn;
+           std::cout << hash_fn(*x);
 
-        \return 64-bit integer value for the hash
-    */
-    hash_t hash() const;
+      \return 64-bit integer value for the hash
+  */
+  hash_t hash() const;
 
-    //! true if `this` is equal to `o`.
-    //! Deprecated: Use eq(const Basic &a, const Basic &b) non-member method
-    virtual bool __eq__(const Basic &o) const = 0;
+  //! true if `this` is equal to `o`.
+  //! Deprecated: Use eq(const Basic &a, const Basic &b) non-member method
+  virtual bool __eq__(const Basic &o) const = 0;
 
-    //! true if `this` is not equal to `o`.
-    bool __neq__(const Basic &o) const;
+  //! true if `this` is not equal to `o`.
+  bool __neq__(const Basic &o) const;
 
-    //! Comparison operator.
-    int __cmp__(const Basic &o) const;
+  //! Comparison operator.
+  int __cmp__(const Basic &o) const;
 
-    /*! Returns -1, 0, 1 for `this < o, this == o, this > o`. This method is
-     used      when you want to sort things like `x+y+z` into canonical order.
-     This function assumes that `o` is the same type as `this`. Use ` __cmp__`
-     if you want general comparison.
-     */
-    virtual int compare(const Basic &o) const = 0;
+  /*! Returns -1, 0, 1 for `this < o, this == o, this > o`. This method is
+   used      when you want to sort things like `x+y+z` into canonical order.
+   This function assumes that `o` is the same type as `this`. Use ` __cmp__`
+   if you want general comparison.
+   */
+  virtual int compare(const Basic &o) const = 0;
 
-    /*! Returns string representation of `self`.
-     */
-    std::string __str__() const;
+  /*! Returns string representation of `self`.
+   */
+  std::string __str__() const;
 
-    //! Substitutes 'subs_dict' into 'self'.
-    RCP<const Basic> subs(const map_basic_basic &subs_dict) const;
+  //! Substitutes 'subs_dict' into 'self'.
+  RCP<const Basic> subs(const map_basic_basic &subs_dict) const;
 
-    RCP<const Basic> xreplace(const map_basic_basic &subs_dict) const;
+  RCP<const Basic> xreplace(const map_basic_basic &subs_dict) const;
 
-    //! expands the special function in terms of exp function
-    virtual RCP<const Basic> expand_as_exp() const
-    {
-        throw NotImplementedError("Not Implemented");
-    }
+  //! expands the special function in terms of exp function
+  virtual RCP<const Basic> expand_as_exp() const {
+    throw NotImplementedError("Not Implemented");
+  }
 
-    //! Returns the list of arguments
-    virtual vec_basic get_args() const = 0;
+  //! Returns the list of arguments
+  virtual vec_basic get_args() const = 0;
 
-    SYMENGINE_INCLUDE_METHODS(= 0;)
+  SYMENGINE_INCLUDE_METHODS(= 0;)
 };
 
 //! Our hash:
 struct RCPBasicHash {
-    //! Returns the hashed value.
-    size_t operator()(const RCP<const Basic> &k) const
-    {
-        return k->hash();
-    }
+  //! Returns the hashed value.
+  size_t operator()(const RCP<const Basic> &k) const { return k->hash(); }
 };
 
 //! Our comparison `(==)`
 struct RCPBasicKeyEq {
-    //! Comparison Operator `==`
-    bool operator()(const RCP<const Basic> &x, const RCP<const Basic> &y) const
-    {
-        return eq(*x, *y);
-    }
+  //! Comparison Operator `==`
+  bool operator()(const RCP<const Basic> &x, const RCP<const Basic> &y) const {
+    return eq(*x, *y);
+  }
 };
 
 //! Our less operator `(<)`:
 struct RCPBasicKeyLess {
-    //! true if `x < y`, false otherwise
-    bool operator()(const RCP<const Basic> &x, const RCP<const Basic> &y) const
-    {
-        hash_t xh = x->hash(), yh = y->hash();
-        if (xh != yh)
-            return xh < yh;
-        if (eq(*x, *y))
-            return false;
-        return x->__cmp__(*y) == -1;
-    }
+  //! true if `x < y`, false otherwise
+  bool operator()(const RCP<const Basic> &x, const RCP<const Basic> &y) const {
+    hash_t xh = x->hash(), yh = y->hash();
+    if (xh != yh)
+      return xh < yh;
+    if (eq(*x, *y))
+      return false;
+    return x->__cmp__(*y) == -1;
+  }
 };
 
 // Convenience functions
@@ -227,8 +212,7 @@ bool neq(const Basic &a, const Basic &b);
 /*! Returns true if `b` is exactly of type `T`. Example:
   `is_a<Symbol>(b)` : true if "b" is of type Symbol
 */
-template <class T>
-bool is_a(const Basic &b);
+template <class T> bool is_a(const Basic &b);
 
 //! Returns true if `b` is an atom. i.e. b.get_args returns an empty vector
 bool is_a_Atom(const Basic &b);
@@ -239,8 +223,7 @@ bool is_a_Atom(const Basic &b);
         is_a_sub<Symbol>(b)  // true if `b` is of type `Symbol` or any Symbol's
  subclass
 */
-template <class T>
-bool is_a_sub(const Basic &b);
+template <class T> bool is_a_sub(const Basic &b);
 
 //! Returns true if `a` and `b` are exactly the same type `T`.
 bool is_same_type(const Basic &a, const Basic &b);
@@ -284,18 +267,15 @@ std::ostream &operator<<(std::ostream &out, const SymEngine::Basic &p);
         hash_combine<Basic>(seed2, *x);
         hash_combine<Basic>(seed2, *y);
 */
-template <class T>
-void hash_combine(hash_t &seed, const T &v);
+template <class T> void hash_combine(hash_t &seed, const T &v);
 
 const char *get_version();
 
 } // SymEngine
 
-namespace std
-{
+namespace std {
 //! Specialise `std::hash` for Basic.
-template <>
-struct hash<SymEngine::Basic>;
+template <> struct hash<SymEngine::Basic>;
 }
 
 //! Inline members and functions
@@ -304,19 +284,16 @@ struct hash<SymEngine::Basic>;
 // Macro to define the type_code_id variable and its getter method
 #ifdef WITH_SYMENGINE_VIRTUAL_TYPEID
 #define IMPLEMENT_TYPEID(ID)                                                   \
-    /*! Type_code_id shared by all instances */                                \
-    const static TypeID type_code_id = ID;                                     \
-    /*! Virtual function that gives the type_code_id of the object */          \
-    virtual TypeID get_type_code() const                                       \
-    {                                                                          \
-        return type_code_id;                                                   \
-    };                                                                         \
-    SYMENGINE_INCLUDE_METHODS(;)
+  /*! Type_code_id shared by all instances */                                  \
+  const static TypeID type_code_id = ID;                                       \
+  /*! Virtual function that gives the type_code_id of the object */            \
+  virtual TypeID get_type_code() const { return type_code_id; };               \
+  SYMENGINE_INCLUDE_METHODS(;)
 #else
 #define IMPLEMENT_TYPEID(ID)                                                   \
-    /*! Type_code_id shared by all instances */                                \
-    const static TypeID type_code_id = ID;                                     \
-    SYMENGINE_INCLUDE_METHODS(;)
+  /*! Type_code_id shared by all instances */                                  \
+  const static TypeID type_code_id = ID;                                       \
+  SYMENGINE_INCLUDE_METHODS(;)
 #endif
 
 #ifdef WITH_SYMENGINE_VIRTUAL_TYPEID

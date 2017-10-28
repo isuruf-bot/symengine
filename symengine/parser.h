@@ -3,8 +3,7 @@
 
 #include <symengine/basic.h>
 
-namespace SymEngine
-{
+namespace SymEngine {
 
 RCP<const Basic> parse(const std::string &s);
 

@@ -6,18 +6,11 @@
 #include <symengine/symengine_config.h>
 #include <symengine/symengine_assert.h>
 
-namespace SymEngine
-{
+namespace SymEngine {
 
 // Reference modifications.
-template <typename T>
-struct remove_reference {
-    typedef T type;
-};
-template <typename T>
-struct remove_reference<T &> {
-    typedef T type;
-};
+template <typename T> struct remove_reference { typedef T type; };
+template <typename T> struct remove_reference<T &> { typedef T type; };
 
 // Use implicit_cast as a safe version of static_cast or const_cast
 // for upcasting in the type hierarchy (i.e. casting a pointer to Foo
@@ -33,10 +26,8 @@ struct remove_reference<T &> {
 //
 //   implicit_cast<ToType>(expr)
 
-template <typename To, typename From>
-inline To implicit_cast(const From &f)
-{
-    return f;
+template <typename To, typename From> inline To implicit_cast(const From &f) {
+  return f;
 }
 
 // When you upcast (that is, cast a pointer from type Foo to type
@@ -60,79 +51,74 @@ inline To implicit_cast(const From &f)
 template <typename To, typename From> // use like this: down_cast<T*>(foo).
 inline To down_cast(From *f)          // Only accept pointers.
 {
-    // Ensures that To is a sub-type of From *.  This test is here only
-    // for compile-time type checking, and has no overhead in an
-    // optimized build at run-time, as it will be optimized away
-    // completely.
-    if (false) {
-        implicit_cast<From *, To>(0);
-    }
+  // Ensures that To is a sub-type of From *.  This test is here only
+  // for compile-time type checking, and has no overhead in an
+  // optimized build at run-time, as it will be optimized away
+  // completely.
+  if (false) {
+    implicit_cast<From *, To>(0);
+  }
 
-    SYMENGINE_ASSERT(f == NULL || dynamic_cast<To>(f) != NULL);
+  SYMENGINE_ASSERT(f == NULL || dynamic_cast<To>(f) != NULL);
 
-    return static_cast<To>(f);
+  return static_cast<To>(f);
 }
 
 template <typename To, typename From> // use like this: down_cast<T&>(foo);
-inline To down_cast(From &f)
-{
-    typedef typename remove_reference<To>::type *ToAsPointer;
-    // Ensures that To is a sub-type of From *.  This test is here only
-    // for compile-time type checking, and has no overhead in an
-    // optimized build at run-time, as it will be optimized away
-    // completely.
-    if (false) {
-        implicit_cast<From *, ToAsPointer>(0);
-    }
+inline To down_cast(From &f) {
+  typedef typename remove_reference<To>::type *ToAsPointer;
+  // Ensures that To is a sub-type of From *.  This test is here only
+  // for compile-time type checking, and has no overhead in an
+  // optimized build at run-time, as it will be optimized away
+  // completely.
+  if (false) {
+    implicit_cast<From *, ToAsPointer>(0);
+  }
 
-    SYMENGINE_ASSERT(dynamic_cast<ToAsPointer>(&f) != NULL);
+  SYMENGINE_ASSERT(dynamic_cast<ToAsPointer>(&f) != NULL);
 
-    return *static_cast<ToAsPointer>(&f);
-}
-
-template <typename To, typename From>
-inline To
-numeric_cast(From f,
-             typename std::enable_if<(std::is_signed<From>::value
-                                      && std::is_signed<To>::value)
-                                     || (std::is_unsigned<From>::value
-                                         && std::is_unsigned<To>::value)>::type
-                 * = nullptr)
-{
-    SYMENGINE_ASSERT(f <= std::numeric_limits<To>::max());
-    SYMENGINE_ASSERT(f >= std::numeric_limits<To>::min());
-    return static_cast<To>(f);
+  return *static_cast<ToAsPointer>(&f);
 }
 
 template <typename To, typename From>
 inline To numeric_cast(
     From f,
-    typename std::enable_if<(std::is_signed<From>::value
-                             && std::is_unsigned<To>::value)>::type * = nullptr)
-{
-#ifdef WITH_SYMENGINE_ASSERT
-    // Above ifdef is needed to avoid a warning about unused typedefs
-    typedef typename std::make_unsigned<From>::type unsigned_from_type;
-    SYMENGINE_ASSERT(f >= 0);
-    SYMENGINE_ASSERT(static_cast<unsigned_from_type>(f)
-                     <= std::numeric_limits<To>::max());
-#endif
-    return static_cast<To>(f);
+    typename std::enable_if<(std::is_signed<From>::value &&
+                             std::is_signed<To>::value) ||
+                            (std::is_unsigned<From>::value &&
+                             std::is_unsigned<To>::value)>::type * = nullptr) {
+  SYMENGINE_ASSERT(f <= std::numeric_limits<To>::max());
+  SYMENGINE_ASSERT(f >= std::numeric_limits<To>::min());
+  return static_cast<To>(f);
 }
 
 template <typename To, typename From>
 inline To numeric_cast(
     From f,
-    typename std::enable_if<(std::is_unsigned<From>::value
-                             && std::is_signed<To>::value)>::type * = nullptr)
-{
+    typename std::enable_if<(std::is_signed<From>::value &&
+                             std::is_unsigned<To>::value)>::type * = nullptr) {
 #ifdef WITH_SYMENGINE_ASSERT
-    typedef typename std::make_unsigned<To>::type unsigned_to_type;
-    SYMENGINE_ASSERT(
-        f <= static_cast<unsigned_to_type>(std::numeric_limits<To>::max()));
+  // Above ifdef is needed to avoid a warning about unused typedefs
+  typedef typename std::make_unsigned<From>::type unsigned_from_type;
+  SYMENGINE_ASSERT(f >= 0);
+  SYMENGINE_ASSERT(static_cast<unsigned_from_type>(f) <=
+                   std::numeric_limits<To>::max());
+#endif
+  return static_cast<To>(f);
+}
+
+template <typename To, typename From>
+inline To numeric_cast(
+    From f,
+    typename std::enable_if<(std::is_unsigned<From>::value &&
+                             std::is_signed<To>::value)>::type * = nullptr) {
+#ifdef WITH_SYMENGINE_ASSERT
+  typedef typename std::make_unsigned<To>::type unsigned_to_type;
+  SYMENGINE_ASSERT(
+      f <= static_cast<unsigned_to_type>(std::numeric_limits<To>::max()));
 
 #endif
-    return static_cast<To>(f);
+  return static_cast<To>(f);
 }
 
 } // SymEngine

@@ -9,8 +9,7 @@
 
 #include <symengine/basic.h>
 
-namespace SymEngine
-{
+namespace SymEngine {
 /*! \class Add
    Add class keeps an addition of symbolic expressions. Internal representation
    of an Add is a numeric coefficient `coef_` and a dictionary `dict_` of
@@ -39,81 +38,73 @@ namespace SymEngine
         Add(0, {{x, 2}})             -> Mul(2, {{x, 1}})
         Add(1, {{x, 2}, {4, 6}})    -> Add(25, {{x, 2}})
 */
-class Add : public Basic
-{
+class Add : public Basic {
 private:
-    RCP<const Number> coef_; //! The coefficient (e.g. `2` in `2+x+y`)
-    umap_basic_num dict_; //! The dictionary of the rest (e.g. `x+y` in `2+x+y`)
+  RCP<const Number> coef_; //! The coefficient (e.g. `2` in `2+x+y`)
+  umap_basic_num dict_; //! The dictionary of the rest (e.g. `x+y` in `2+x+y`)
 
 public:
-    IMPLEMENT_TYPEID(ADD)
-    /*! Constructs Add from a dictionary by copying the contents of the
-        dictionary. Assumes that the input is in canonical form
-    */
-    Add(const RCP<const Number> &coef, umap_basic_num &&dict);
-    virtual hash_t __hash__() const;
-    virtual bool __eq__(const Basic &o) const;
-    virtual int compare(const Basic &o) const;
-    /*! Creates appropriate instance (i.e Add , Symbol, Integer,
-    * Mul) depending on the size of dictionary `d`.
-    */
-    static RCP<const Basic> from_dict(const RCP<const Number> &coef,
-                                      umap_basic_num &&d);
-    /*!
-    * Adds `(coeff*t)` to the dict `d`
-    */
-    static void dict_add_term(umap_basic_num &d, const RCP<const Number> &coef,
-                              const RCP<const Basic> &t);
-    /*!
-    * Adds `(c*term)` to the number `coeff` (in case both are numbers) or dict
-    * `d` (as a pair `c, term`).
-    * In case `term` is `Add` and `c=1`, expands the `Add` into the `coeff` and
-    * `d`.
-    */
-    static void coef_dict_add_term(const Ptr<RCP<const Number>> &coef,
-                                   umap_basic_num &d,
-                                   const RCP<const Number> &c,
-                                   const RCP<const Basic> &term);
-    //! Converts the Add into a sum of two Basic objects and returns them.
-    void as_two_terms(const Ptr<RCP<const Basic>> &a,
-                      const Ptr<RCP<const Basic>> &b) const;
-    //! Converts a Basic `self` into the form of `coefficient * term`
-    static void as_coef_term(const RCP<const Basic> &self,
-                             const Ptr<RCP<const Number>> &coef,
-                             const Ptr<RCP<const Basic>> &term);
-    //! \return `true` if a given dictionary and a coefficient is in canonical
-    //! form
-    bool is_canonical(const RCP<const Number> &coef,
-                      const umap_basic_num &dict) const;
+  IMPLEMENT_TYPEID(ADD)
+  /*! Constructs Add from a dictionary by copying the contents of the
+      dictionary. Assumes that the input is in canonical form
+  */
+  Add(const RCP<const Number> &coef, umap_basic_num &&dict);
+  virtual hash_t __hash__() const;
+  virtual bool __eq__(const Basic &o) const;
+  virtual int compare(const Basic &o) const;
+  /*! Creates appropriate instance (i.e Add , Symbol, Integer,
+  * Mul) depending on the size of dictionary `d`.
+  */
+  static RCP<const Basic> from_dict(const RCP<const Number> &coef,
+                                    umap_basic_num &&d);
+  /*!
+  * Adds `(coeff*t)` to the dict `d`
+  */
+  static void dict_add_term(umap_basic_num &d, const RCP<const Number> &coef,
+                            const RCP<const Basic> &t);
+  /*!
+  * Adds `(c*term)` to the number `coeff` (in case both are numbers) or dict
+  * `d` (as a pair `c, term`).
+  * In case `term` is `Add` and `c=1`, expands the `Add` into the `coeff` and
+  * `d`.
+  */
+  static void coef_dict_add_term(const Ptr<RCP<const Number>> &coef,
+                                 umap_basic_num &d, const RCP<const Number> &c,
+                                 const RCP<const Basic> &term);
+  //! Converts the Add into a sum of two Basic objects and returns them.
+  void as_two_terms(const Ptr<RCP<const Basic>> &a,
+                    const Ptr<RCP<const Basic>> &b) const;
+  //! Converts a Basic `self` into the form of `coefficient * term`
+  static void as_coef_term(const RCP<const Basic> &self,
+                           const Ptr<RCP<const Number>> &coef,
+                           const Ptr<RCP<const Basic>> &term);
+  //! \return `true` if a given dictionary and a coefficient is in canonical
+  //! form
+  bool is_canonical(const RCP<const Number> &coef,
+                    const umap_basic_num &dict) const;
 
-    /*!
-        Returns the arguments of the Add.
-        For an Add of the form,
+  /*!
+      Returns the arguments of the Add.
+      For an Add of the form,
 
-            Add(coef_, {{key1, value1}, {key2, value2}, ... })
+          Add(coef_, {{key1, value1}, {key2, value2}, ... })
 
-        if coef_ is non-zero it returns,
+      if coef_ is non-zero it returns,
 
-            {coef_, key1*value1, key2*value2, ... }
+          {coef_, key1*value1, key2*value2, ... }
 
-        otherwise it returns,
+      otherwise it returns,
 
-            {key1*value1, key2*value2, ... }
+          {key1*value1, key2*value2, ... }
 
-        \return list of arguments
-    */
-    virtual vec_basic get_args() const;
+      \return list of arguments
+  */
+  virtual vec_basic get_args() const;
 
-    //! \return const reference to the coefficient of the Add
-    inline const RCP<const Number> &get_coef() const
-    {
-        return coef_;
-    }
-    //! \return const reference to the dictionary of the Add
-    inline const umap_basic_num &get_dict() const
-    {
-        return dict_;
-    }
+  //! \return const reference to the coefficient of the Add
+  inline const RCP<const Number> &get_coef() const { return coef_; }
+  //! \return const reference to the dictionary of the Add
+  inline const umap_basic_num &get_dict() const { return dict_; }
 };
 
 /*!

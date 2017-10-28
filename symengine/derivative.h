@@ -9,8 +9,7 @@
 
 #include <symengine/basic.h>
 
-namespace SymEngine
-{
+namespace SymEngine {
 
 //! Differentiation w.r.t symbols
 RCP<const Basic> diff(const RCP<const Basic> &arg, const RCP<const Symbol> &x);

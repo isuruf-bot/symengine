@@ -25,56 +25,51 @@ using SymEngine::boolTrue;
 using SymEngine::sin;
 using SymEngine::sqrt;
 
-TEST_CASE("Arithmetic", "[ccode]")
-{
-    auto x = symbol("x");
-    auto y = symbol("y");
-    auto p = add(add(add(add(x, mul(x, y)), pow(x, y)), mul(x, x)),
-                 sqrt(integer(2)));
-    REQUIRE(ccode(*p) == "x + x*y + sqrt(2) + pow(x, 2) + pow(x, y)");
+TEST_CASE("Arithmetic", "[ccode]") {
+  auto x = symbol("x");
+  auto y = symbol("y");
+  auto p =
+      add(add(add(add(x, mul(x, y)), pow(x, y)), mul(x, x)), sqrt(integer(2)));
+  REQUIRE(ccode(*p) == "x + x*y + sqrt(2) + pow(x, 2) + pow(x, y)");
 }
 
-TEST_CASE("Functions", "[ccode]")
-{
-    auto x = symbol("x");
-    auto p = sin(x);
-    REQUIRE(ccode(*p) == "sin(x)");
+TEST_CASE("Functions", "[ccode]") {
+  auto x = symbol("x");
+  auto p = sin(x);
+  REQUIRE(ccode(*p) == "sin(x)");
 
-    p = function_symbol("f", x);
-    REQUIRE(ccode(*p) == "f(x)");
+  p = function_symbol("f", x);
+  REQUIRE(ccode(*p) == "f(x)");
 
-    p = function_symbol("f", pow(integer(2), x));
-    REQUIRE(ccode(*p) == "f(pow(2, x))");
+  p = function_symbol("f", pow(integer(2), x));
+  REQUIRE(ccode(*p) == "f(pow(2, x))");
 }
 
-TEST_CASE("Relationals", "[ccode]")
-{
-    auto x = symbol("x");
-    auto y = symbol("y");
+TEST_CASE("Relationals", "[ccode]") {
+  auto x = symbol("x");
+  auto y = symbol("y");
 
-    auto p = Eq(x, y);
-    CHECK(ccode(*p) == "x == y");
+  auto p = Eq(x, y);
+  CHECK(ccode(*p) == "x == y");
 
-    p = Ne(x, y);
-    CHECK(ccode(*p) == "x != y");
+  p = Ne(x, y);
+  CHECK(ccode(*p) == "x != y");
 
-    p = Le(x, y);
-    CHECK(ccode(*p) == "x <= y");
+  p = Le(x, y);
+  CHECK(ccode(*p) == "x <= y");
 
-    p = Lt(x, y);
-    CHECK(ccode(*p) == "x < y");
+  p = Lt(x, y);
+  CHECK(ccode(*p) == "x < y");
 }
 
-TEST_CASE("Piecewise", "[ccode]")
-{
-    auto x = symbol("x");
-    auto y = symbol("y");
-    auto int1 = interval(NegInf, integer(2), true, false);
-    auto int2 = interval(integer(2), integer(5), true, false);
-    auto p = piecewise({{x, contains(x, int1)},
-                        {y, contains(x, int2)},
-                        {add(x, y), boolTrue}});
+TEST_CASE("Piecewise", "[ccode]") {
+  auto x = symbol("x");
+  auto y = symbol("y");
+  auto int1 = interval(NegInf, integer(2), true, false);
+  auto int2 = interval(integer(2), integer(5), true, false);
+  auto p = piecewise(
+      {{x, contains(x, int1)}, {y, contains(x, int2)}, {add(x, y), boolTrue}});
 
-    REQUIRE(ccode(*p) == "((x <= 2) ? (\n   x\n)\n: ((x > 2 && x <= 5) ? (\n   "
-                         "y\n)\n: (\n   x + y\n)))");
+  REQUIRE(ccode(*p) == "((x <= 2) ? (\n   x\n)\n: ((x > 2 && x <= 5) ? (\n   "
+                       "y\n)\n: (\n   x + y\n)))");
 }

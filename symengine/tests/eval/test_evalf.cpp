@@ -90,86 +90,82 @@ using SymEngine::min;
 using SymEngine::rcp_static_cast;
 using SymEngine::down_cast;
 
-TEST_CASE("evalf: real_double", "[evalf]")
-{
-    RCP<const Basic> r1, r2;
-    r1 = sin(integer(2));
-    r2 = evalf(*r1, 53, true);
-    REQUIRE(r2->get_type_code() == SymEngine::REAL_DOUBLE);
-    double d1 = 0.909297;
-    double d2 = (down_cast<const RealDouble &>(*r2)).as_double();
-    d1 = fabs(d1 - d2);
-    d2 = 0.000001;
-    REQUIRE(d1 < d2);
+TEST_CASE("evalf: real_double", "[evalf]") {
+  RCP<const Basic> r1, r2;
+  r1 = sin(integer(2));
+  r2 = evalf(*r1, 53, true);
+  REQUIRE(r2->get_type_code() == SymEngine::REAL_DOUBLE);
+  double d1 = 0.909297;
+  double d2 = (down_cast<const RealDouble &>(*r2)).as_double();
+  d1 = fabs(d1 - d2);
+  d2 = 0.000001;
+  REQUIRE(d1 < d2);
 }
 
 #ifdef HAVE_SYMENGINE_MPFR
-TEST_CASE("evalf: real_mpfr", "[evalf]")
-{
-    RCP<const Basic> r1, r2;
-    r1 = mul(pi, integer(integer_class("1963319607")));
-    r2 = integer(integer_class("6167950454"));
-    r1 = sub(r1, r2);
+TEST_CASE("evalf: real_mpfr", "[evalf]") {
+  RCP<const Basic> r1, r2;
+  r1 = mul(pi, integer(integer_class("1963319607")));
+  r2 = integer(integer_class("6167950454"));
+  r1 = sub(r1, r2);
 
-    r2 = evalf(*r1, 100, true);
-    REQUIRE(r2->get_type_code() == SymEngine::REAL_MPFR);
-    REQUIRE(!(down_cast<const RealMPFR &>(*r2)).is_zero());
+  r2 = evalf(*r1, 100, true);
+  REQUIRE(r2->get_type_code() == SymEngine::REAL_MPFR);
+  REQUIRE(!(down_cast<const RealMPFR &>(*r2)).is_zero());
 
-    r2 = evalf(*r1, 60, true);
-    REQUIRE(r2->get_type_code() == SymEngine::REAL_MPFR);
-    REQUIRE((down_cast<const RealMPFR &>(*r2)).is_zero());
+  r2 = evalf(*r1, 60, true);
+  REQUIRE(r2->get_type_code() == SymEngine::REAL_MPFR);
+  REQUIRE((down_cast<const RealMPFR &>(*r2)).is_zero());
 }
 #endif // HAVE_SYMENGINE_MPFR
 
-TEST_CASE("evalf: complex_double", "[evalf]")
-{
-    RCP<const Basic> r1, r2;
-    r1 = add(sin(integer(4)), mul(sin(integer(3)), I));
-    // r1 = sin(4) + sin(3)i
-    r2 = add(sin(integer(2)), mul(sin(integer(7)), I));
-    // r2 = sin(2) + sin(7)i
+TEST_CASE("evalf: complex_double", "[evalf]") {
+  RCP<const Basic> r1, r2;
+  r1 = add(sin(integer(4)), mul(sin(integer(3)), I));
+  // r1 = sin(4) + sin(3)i
+  r2 = add(sin(integer(2)), mul(sin(integer(7)), I));
+  // r2 = sin(2) + sin(7)i
 
-    r1 = mul(r1, r2);
-    // r1 = (sin(4) + sin(3)i) * (sin(2) + sin(7)i)
+  r1 = mul(r1, r2);
+  // r1 = (sin(4) + sin(3)i) * (sin(2) + sin(7)i)
 
-    r2 = evalf(*r1, 53, false);
-    REQUIRE(r2->get_type_code() == SymEngine::COMPLEX_DOUBLE);
+  r2 = evalf(*r1, 53, false);
+  REQUIRE(r2->get_type_code() == SymEngine::COMPLEX_DOUBLE);
 
-    r1 = (down_cast<const ComplexDouble &>(*r2)).real_part();
-    REQUIRE(r1->get_type_code() == SymEngine::REAL_DOUBLE);
+  r1 = (down_cast<const ComplexDouble &>(*r2)).real_part();
+  REQUIRE(r1->get_type_code() == SymEngine::REAL_DOUBLE);
 
-    double d1 = (rcp_static_cast<const RealDouble>(
-                     (down_cast<const ComplexDouble &>(*r2)).real_part()))
-                    ->as_double();
-    double d2 = -0.780872515;
-    d2 = fabs(d1 - d2);
-    d1 = 0.000001;
-    REQUIRE(d2 < d1);
+  double d1 = (rcp_static_cast<const RealDouble>(
+                   (down_cast<const ComplexDouble &>(*r2)).real_part()))
+                  ->as_double();
+  double d2 = -0.780872515;
+  d2 = fabs(d1 - d2);
+  d1 = 0.000001;
+  REQUIRE(d2 < d1);
 
-    r1 = (down_cast<const ComplexDouble &>(*r2)).imaginary_part();
-    REQUIRE(r1->get_type_code() == SymEngine::REAL_DOUBLE);
-    d1 = (rcp_static_cast<const RealDouble>(
-              (down_cast<const ComplexDouble &>(*r2)).imaginary_part()))
-             ->as_double();
-    d2 = -0.3688890370;
-    d2 = fabs(d1 - d2);
-    d1 = 0.000001;
-    REQUIRE(d2 < d1);
+  r1 = (down_cast<const ComplexDouble &>(*r2)).imaginary_part();
+  REQUIRE(r1->get_type_code() == SymEngine::REAL_DOUBLE);
+  d1 = (rcp_static_cast<const RealDouble>(
+            (down_cast<const ComplexDouble &>(*r2)).imaginary_part()))
+           ->as_double();
+  d2 = -0.3688890370;
+  d2 = fabs(d1 - d2);
+  d1 = 0.000001;
+  REQUIRE(d2 < d1);
 }
 
 #ifdef HAVE_SYMENGINE_MPC
-TEST_CASE("evalf: complex_mpc", "[evalf]")
-{
-    RCP<const Basic> r1, r2, c1, c2;
-    r1 = mul(pi, integer(integer_class("1963319607")));
-    r2 = integer(integer_class("6167950454"));
-    c1 = add(r1, mul(r1, I));
-    c2 = add(r2, mul(r2, I));
+TEST_CASE("evalf: complex_mpc", "[evalf]") {
+  RCP<const Basic> r1, r2, c1, c2;
+  r1 = mul(pi, integer(integer_class("1963319607")));
+  r2 = integer(integer_class("6167950454"));
+  c1 = add(r1, mul(r1, I));
+  c2 = add(r2, mul(r2, I));
 
-    r1 = evalf(*c1, 100, false);
+  r1 = evalf(*c1, 100, false);
 
-    REQUIRE(static_cast<SymEngine::TypeID>(r1->get_type_code())
-            == SymEngine::COMPLEX_MPC);
-    REQUIRE(!(down_cast<const ComplexMPC &>(*r1)).is_zero());
+  REQUIRE(static_cast<SymEngine::TypeID>(r1->get_type_code()) ==
+          SymEngine::COMPLEX_MPC);
+  REQUIRE(!(down_cast<const ComplexMPC &>(*r1)).is_zero());
 }
 #endif // HAVE_SYMENGINE_MPC

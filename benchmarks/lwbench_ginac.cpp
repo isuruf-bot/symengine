@@ -21,94 +21,88 @@ using GiNaC::real_part;
 using GiNaC::symbol;
 using GiNaC::factorial;
 
-double A()
-{
-    auto t1 = std::chrono::high_resolution_clock::now();
-    for (int i = 1; i <= 100; i++) {
-        factorial(1000 + i) / factorial(900 + i);
-    }
-    auto t2 = std::chrono::high_resolution_clock::now();
+double A() {
+  auto t1 = std::chrono::high_resolution_clock::now();
+  for (int i = 1; i <= 100; i++) {
+    factorial(1000 + i) / factorial(900 + i);
+  }
+  auto t2 = std::chrono::high_resolution_clock::now();
 
-    return std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count()
-           / 1000000000.0;
+  return std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count() /
+         1000000000.0;
 }
 
-double B()
-{
-    numeric s = 0;
+double B() {
+  numeric s = 0;
 
-    auto t1 = std::chrono::high_resolution_clock::now();
-    for (int i = 1; i <= 1000; i++) {
-        s = s + numeric(1) / i;
-    }
-    auto t2 = std::chrono::high_resolution_clock::now();
+  auto t1 = std::chrono::high_resolution_clock::now();
+  for (int i = 1; i <= 1000; i++) {
+    s = s + numeric(1) / i;
+  }
+  auto t2 = std::chrono::high_resolution_clock::now();
 
-    return std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count()
-           / 1000000000.0;
+  return std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count() /
+         1000000000.0;
 }
 
-double C()
-{
-    numeric x = numeric(13 * 17 * 31);
-    numeric y = numeric(13 * 19 * 29);
+double C() {
+  numeric x = numeric(13 * 17 * 31);
+  numeric y = numeric(13 * 19 * 29);
 
-    auto t1 = std::chrono::high_resolution_clock::now();
-    for (int i = 1; i <= 200; i++) {
-        gcd(pow(x, numeric(300 + i % 181)), pow(y, numeric(200 + i % 183)));
-    }
-    auto t2 = std::chrono::high_resolution_clock::now();
+  auto t1 = std::chrono::high_resolution_clock::now();
+  for (int i = 1; i <= 200; i++) {
+    gcd(pow(x, numeric(300 + i % 181)), pow(y, numeric(200 + i % 183)));
+  }
+  auto t2 = std::chrono::high_resolution_clock::now();
 
-    return std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count()
-           / 1000000000.0;
+  return std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count() /
+         1000000000.0;
 }
 
-double D()
-{
-    ex s = numeric(0);
-    ex y = symbol("y");
-    ex t = symbol("t");
+double D() {
+  ex s = numeric(0);
+  ex y = symbol("y");
+  ex t = symbol("t");
 
-    auto t1 = std::chrono::high_resolution_clock::now();
-    for (int i = 1; i <= 10; i++) {
-        s = s
-            + numeric(i) * y * pow(t, numeric(i))
-                  / (pow(y + numeric(i) * t, numeric(i)));
-    }
-    auto t2 = std::chrono::high_resolution_clock::now();
+  auto t1 = std::chrono::high_resolution_clock::now();
+  for (int i = 1; i <= 10; i++) {
+    s = s +
+        numeric(i) * y * pow(t, numeric(i)) /
+            (pow(y + numeric(i) * t, numeric(i)));
+  }
+  auto t2 = std::chrono::high_resolution_clock::now();
 
-    return std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count()
-           / 1000000000.0;
+  return std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count() /
+         1000000000.0;
 }
 
-double E()
-{
-    ex s = numeric(0);
-    ex y = symbol("y");
-    ex t = symbol("t");
+double E() {
+  ex s = numeric(0);
+  ex y = symbol("y");
+  ex t = symbol("t");
 
-    auto t1 = std::chrono::high_resolution_clock::now();
-    for (int i = 1; i <= 10; i++) {
-        s = s
-            + numeric(i) * y * pow(t, numeric(i))
-                  / (pow(y + abs(numeric(5 - i)) * t, numeric(i)));
-    }
-    auto t2 = std::chrono::high_resolution_clock::now();
+  auto t1 = std::chrono::high_resolution_clock::now();
+  for (int i = 1; i <= 10; i++) {
+    s = s +
+        numeric(i) * y * pow(t, numeric(i)) /
+            (pow(y + abs(numeric(5 - i)) * t, numeric(i)));
+  }
+  auto t2 = std::chrono::high_resolution_clock::now();
 
-    return std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count()
-           / 1000000000.0;
+  return std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count() /
+         1000000000.0;
 }
 
-int main(int argc, char *argv[])
-{
-    std::cout << "Time for A : \t " << std::setw(15) << std::setprecision(9)
-              << std::fixed << A() << std::endl;
-    std::cout << "Time for B : \t " << std::setw(15) << std::setprecision(9)
-              << std::fixed << B() << std::endl;
-    std::cout << "Time for C : \t " << std::setw(15) << std::setprecision(9)
-              << std::fixed << C() << std::endl;
-    std::cout << "Time for D : \t " << std::setw(15) << std::setprecision(9)
-              << std::fixed << D() << std::endl;
-    std::cout << "Time for E : \t " << std::setw(15) << std::setprecision(9)
-              << std::fixed << E() << std::endl;
-    return 0;
+int main(int argc, char *argv[]) {
+  std::cout << "Time for A : \t " << std::setw(15) << std::setprecision(9)
+            << std::fixed << A() << std::endl;
+  std::cout << "Time for B : \t " << std::setw(15) << std::setprecision(9)
+            << std::fixed << B() << std::endl;
+  std::cout << "Time for C : \t " << std::setw(15) << std::setprecision(9)
+            << std::fixed << C() << std::endl;
+  std::cout << "Time for D : \t " << std::setw(15) << std::setprecision(9)
+            << std::fixed << D() << std::endl;
+  std::cout << "Time for E : \t " << std::setw(15) << std::setprecision(9)
+            << std::fixed << E() << std::endl;
+  return 0;
 }

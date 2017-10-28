@@ -19,14 +19,14 @@ extern "C" {
 
 // Use SYMENGINE_C_ASSERT in C tests
 #define SYMENGINE_C_ASSERT(cond)                                               \
-    {                                                                          \
-        if (0 == (cond)) {                                                     \
-            printf("SYMENGINE_C_ASSERT failed: %s \nfunction %s (), line "     \
-                   "number %d at\n%s\n",                                       \
-                   __FILE__, __func__, __LINE__, #cond);                       \
-            abort();                                                           \
-        }                                                                      \
-    }
+  {                                                                            \
+    if (0 == (cond)) {                                                         \
+      printf("SYMENGINE_C_ASSERT failed: %s \nfunction %s (), line "           \
+             "number %d at\n%s\n",                                             \
+             __FILE__, __func__, __LINE__, #cond);                             \
+      abort();                                                                 \
+    }                                                                          \
+  }
 
 #include "symengine/symengine_exception.h"
 
@@ -38,14 +38,14 @@ typedef enum {
 #include "symengine/type_codes.inc"
 #undef SYMENGINE_ENUM
 #undef SYMENGINE_INCLUDE_ALL
-    SYMENGINE_TypeID_Count
+  SYMENGINE_TypeID_Count
 } TypeID;
 
 //! Struct to hold the real and imaginary parts of std::complex<double>
 //! extracted from basic
 typedef struct dcomplex {
-    double real;
-    double imag;
+  double real;
+  double imag;
 } dcomplex;
 
 // The size of 'CRCPBasic_C' must be the same as CRCPBasic (which contains a
@@ -65,10 +65,10 @@ typedef struct dcomplex {
 // that case one needs to modify the contents of this struct to adjust its size
 // and/or alignment.
 struct CRCPBasic_C {
-    void *data;
+  void *data;
 #if !defined(WITH_SYMENGINE_RCP)
-    void *teuchos_handle;
-    int teuchos_strength;
+  void *teuchos_handle;
+  int teuchos_strength;
 #endif
 };
 

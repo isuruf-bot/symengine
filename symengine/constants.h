@@ -12,47 +12,38 @@
 #include <symengine/infinity.h>
 #include <symengine/nan.h>
 
-namespace SymEngine
-{
+namespace SymEngine {
 
-class Constant : public Basic
-{
+class Constant : public Basic {
 private:
-    //! name of Constant
-    std::string name_;
+  //! name of Constant
+  std::string name_;
 
 public:
-    IMPLEMENT_TYPEID(CONSTANT)
-    //! Constant Constructor
-    Constant(const std::string &name);
-    //! \return Size of the hash
-    virtual hash_t __hash__() const;
-    /*! Equality comparator
-     * \param o - Object to be compared with
-     * \return whether the 2 objects are equal
-     * */
-    virtual bool __eq__(const Basic &o) const;
-    /*! Comparison operator
-     * \param o - Object to be compared with
-     * \return `0` if equal, `-1` , `1` according to string compare
-     * */
-    virtual int compare(const Basic &o) const;
-    //! \return name of the Constant.
-    inline std::string get_name() const
-    {
-        return name_;
-    }
+  IMPLEMENT_TYPEID(CONSTANT)
+  //! Constant Constructor
+  Constant(const std::string &name);
+  //! \return Size of the hash
+  virtual hash_t __hash__() const;
+  /*! Equality comparator
+   * \param o - Object to be compared with
+   * \return whether the 2 objects are equal
+   * */
+  virtual bool __eq__(const Basic &o) const;
+  /*! Comparison operator
+   * \param o - Object to be compared with
+   * \return `0` if equal, `-1` , `1` according to string compare
+   * */
+  virtual int compare(const Basic &o) const;
+  //! \return name of the Constant.
+  inline std::string get_name() const { return name_; }
 
-    virtual vec_basic get_args() const
-    {
-        return {};
-    }
+  virtual vec_basic get_args() const { return {}; }
 };
 
 //! inline version to return `Constant`
-inline RCP<const Constant> constant(const std::string &name)
-{
-    return make_rcp<const Constant>(name);
+inline RCP<const Constant> constant(const std::string &name) {
+  return make_rcp<const Constant>(name);
 }
 
 // Constant Numbers

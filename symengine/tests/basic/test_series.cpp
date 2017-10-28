@@ -22,15 +22,14 @@ using SymEngine::cos;
 using SymEngine::series;
 using SymEngine::down_cast;
 
-TEST_CASE("Expression series expansion interface", "[Expansion interface]")
-{
-    RCP<const Symbol> x = symbol("x"), y = symbol("y");
-    auto ex = div(integer(1), add(integer(1), x));
+TEST_CASE("Expression series expansion interface", "[Expansion interface]") {
+  RCP<const Symbol> x = symbol("x"), y = symbol("y");
+  auto ex = div(integer(1), add(integer(1), x));
 
-    auto ser = series(ex, x, 10);
+  auto ser = series(ex, x, 10);
 
-    REQUIRE(down_cast<const Number &>(*(ser->get_coeff(7))).is_minus_one());
-    REQUIRE(down_cast<const Number &>(*(ser->as_dict()[8])).is_one());
-    REQUIRE(ser->as_basic()->__str__()
-            == "1 - x + x**2 - x**3 + x**4 - x**5 + x**6 - x**7 + x**8 - x**9");
+  REQUIRE(down_cast<const Number &>(*(ser->get_coeff(7))).is_minus_one());
+  REQUIRE(down_cast<const Number &>(*(ser->as_dict()[8])).is_one());
+  REQUIRE(ser->as_basic()->__str__() ==
+          "1 - x + x**2 - x**3 + x**4 - x**5 + x**6 - x**7 + x**8 - x**9");
 }

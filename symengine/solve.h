@@ -15,8 +15,7 @@
 #include <symengine/polys/uratpoly.h>
 #include <symengine/matrix.h>
 
-namespace SymEngine
-{
+namespace SymEngine {
 /*
  * Solves the given equation `f` and returns all possible values of `sym` as a
  * Set, given
@@ -42,27 +41,27 @@ RCP<const Set> solve_poly(const RCP<const Basic> &f,
                           const RCP<const Set> &domain = universalset());
 
 // Helper method for solving lower order polynomials using known formulae.
-RCP<const Set> solve_poly_heuristics(const vec_basic &coeffs,
-                                     const RCP<const Set> &domain
-                                     = universalset());
+RCP<const Set>
+solve_poly_heuristics(const vec_basic &coeffs,
+                      const RCP<const Set> &domain = universalset());
 
 // Helper method for solving linear equations.
 RCP<const Set> solve_poly_linear(const vec_basic &coeffs,
                                  const RCP<const Set> &domain = universalset());
 
 // Helper method for solving quadratic equations.
-RCP<const Set> solve_poly_quadratic(const vec_basic &coeffs,
-                                    const RCP<const Set> &domain
-                                    = universalset());
+RCP<const Set>
+solve_poly_quadratic(const vec_basic &coeffs,
+                     const RCP<const Set> &domain = universalset());
 
 // Helper method for solving cubic equations.
 RCP<const Set> solve_poly_cubic(const vec_basic &coeffs,
                                 const RCP<const Set> &domain = universalset());
 
 // Helper method for solving quartic(degree-4) equations.
-RCP<const Set> solve_poly_quartic(const vec_basic &coeffs,
-                                  const RCP<const Set> &domain
-                                  = universalset());
+RCP<const Set>
+solve_poly_quartic(const vec_basic &coeffs,
+                   const RCP<const Set> &domain = universalset());
 
 /*
  * Helper method to decide if solve_trig can solve a particular equation.
