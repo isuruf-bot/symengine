@@ -19,7 +19,8 @@ public:
            {"*", 8}, {"/", 9}, {"**", 10}, {"~", 11}};
     bool convert_xor_;
 
-    ExpressionParser(bool convert_xor){
+    ExpressionParser(bool convert_xor)
+    {
         if (convert_xor) {
             op_precedence["^"] = op_precedence["**"];
         }
