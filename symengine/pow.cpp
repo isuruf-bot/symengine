@@ -109,11 +109,11 @@ RCP<const Basic> pow(const RCP<const Basic> &a, const RCP<const Basic> &b)
     }
 
     if (eq(*a, *one)) {
-        if (eq(*b, *Inf) || eq(*b, *NegInf)) 
+        if (eq(*b, *Inf) || eq(*b, *NegInf))
             return Nan;
         return one;
     }
-    
+
     if (eq(*a, *minus_one)) {
         if (is_a<Integer>(*b)) {
             return is_a<Integer>(*div(b, integer(2))) ? one : minus_one;
