@@ -1528,12 +1528,16 @@ CLambdaRealDoubleVisitor *lambda_real_double_visitor_new()
     return new CLambdaRealDoubleVisitor();
 }
 
-void lambda_real_double_visitor_init(CLambdaRealDoubleVisitor *self, const CVecBasic *args, const CVecBasic *exprs, int perform_cse)
+void lambda_real_double_visitor_init(CLambdaRealDoubleVisitor *self,
+                                     const CVecBasic *args,
+                                     const CVecBasic *exprs, int perform_cse)
 {
     self->m.init(args->m, exprs->m, perform_cse);
 }
 
-void lambda_real_double_visitor_call(CLambdaRealDoubleVisitor *self, double * const outs, const double * const inps)
+void lambda_real_double_visitor_call(CLambdaRealDoubleVisitor *self,
+                                     double *const outs,
+                                     const double *const inps)
 {
     self->m.call(outs, inps);
 }
@@ -1542,7 +1546,6 @@ void lambda_real_double_visitor_free(CLambdaRealDoubleVisitor *self)
 {
     delete self;
 }
-
 
 //! Print stacktrace on segfault
 void symengine_print_stack_on_segfault()
