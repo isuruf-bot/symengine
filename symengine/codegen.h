@@ -139,10 +139,8 @@ public:
         const auto &args = x.get_args();
         switch (args.size()) {
             case 0:
-                throw SymEngineException("Impossible");
             case 1:
-                s << apply(args[0]);
-                break;
+                throw SymEngineException("Impossible");
             case 2:
                 s << "fmax(" << apply(args[0]) << ", " << apply(args[1]) << ")";
                 break;
@@ -161,10 +159,8 @@ public:
         const auto &args = x.get_args();
         switch (args.size()) {
             case 0:
-                throw SymEngineException("Impossible");
             case 1:
-                s << apply(args[0]);
-                break;
+                throw SymEngineException("Impossible");
             case 2:
                 s << "fmin(" << apply(args[0]) << ", " << apply(args[1]) << ")";
                 break;
