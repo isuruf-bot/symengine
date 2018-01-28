@@ -58,7 +58,6 @@ TEST_CASE("C-code printers", "[CodePrinter]")
     REQUIRE(c99.apply(Inf) == "INFINITY");
 }
 
-
 TEST_CASE("Arithmetic", "[ccode]")
 {
     auto x = symbol("x");

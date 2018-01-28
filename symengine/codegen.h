@@ -326,10 +326,10 @@ public:
     }
     void bvisit(const Max &x)
     {
-        const auto& args = x.get_args();
+        const auto &args = x.get_args();
         std::ostringstream s;
         s << "Math.max(";
-        for (size_t i = 0; i < args.size(); ++i){
+        for (size_t i = 0; i < args.size(); ++i) {
             s << apply(args[i]);
             s << ((i == args.size() - 1) ? ")" : ", ");
         }
@@ -337,10 +337,10 @@ public:
     }
     void bvisit(const Min &x)
     {
-        const auto& args = x.get_args();
+        const auto &args = x.get_args();
         std::ostringstream s;
         s << "Math.min(";
-        for (size_t i = 0; i < args.size(); ++i){
+        for (size_t i = 0; i < args.size(); ++i) {
             s << apply(args[i]);
             s << ((i == args.size() - 1) ? ")" : ", ");
         }
@@ -359,7 +359,6 @@ std::string jscode(const Basic &x)
     JSCodePrinter p;
     return p.apply(x);
 }
-
 }
 
 #endif // SYMENGINE_CODEGEN_H
