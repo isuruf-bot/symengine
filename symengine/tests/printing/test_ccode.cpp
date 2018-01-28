@@ -23,6 +23,23 @@ using SymEngine::Inf;
 using SymEngine::NegInf;
 using SymEngine::boolTrue;
 using SymEngine::sin;
+using SymEngine::cos;
+using SymEngine::tan;
+using SymEngine::asin;
+using SymEngine::acos;
+using SymEngine::atan;
+using SymEngine::atan2;
+using SymEngine::exp;
+using SymEngine::log;
+using SymEngine::sinh;
+using SymEngine::cosh;
+using SymEngine::tanh;
+using SymEngine::asinh;
+using SymEngine::acosh;
+using SymEngine::atanh;
+using SymEngine::floor;
+using SymEngine::ceiling;
+using SymEngine::erf;
 using SymEngine::sqrt;
 using SymEngine::rational;
 
@@ -47,14 +64,44 @@ TEST_CASE("Rational", "[ccode]")
 TEST_CASE("Functions", "[ccode]")
 {
     auto x = symbol("x");
-    auto p = sin(x);
-    REQUIRE(ccode(*p) == "sin(x)");
+    Basic p;
 
     p = function_symbol("f", x);
     REQUIRE(ccode(*p) == "f(x)");
 
     p = function_symbol("f", pow(integer(2), x));
     REQUIRE(ccode(*p) == "f(pow(2, x))");
+
+    p = sin(x);
+    REQUIRE(ccode(*p) == "sin(x)");
+    p = cos(x);
+    REQUIRE(ccode(*p) == "cos(x)");
+    p = tan(x);
+    REQUIRE(ccode(*p) == "tan(x)");
+    p = atan2(x, y);
+    REQUIRE(ccode(*p) == "atan2(x, y)");
+    p = exp(x);
+    REQUIRE(ccode(*p) == "exp(x)");
+    p = log(x);
+    REQUIRE(ccode(*p) == "log(x)");
+    p = sinh(x);
+    REQUIRE(ccode(*p) == "sinh(x)");
+    p = cosh(x);
+    REQUIRE(ccode(*p) == "cosh(x)");
+    p = tanh(x);
+    REQUIRE(ccode(*p) == "tanh(x)");
+    p = asinh(x);
+    REQUIRE(ccode(*p) == "asinh(x)");
+    p = acosh(x);
+    REQUIRE(ccode(*p) == "acosh(x)");
+    p = atanh(x);
+    REQUIRE(ccode(*p) == "atanh(x)");
+    p = floor(x);
+    REQUIRE(ccode(*p) == "floor(x)");
+    p = ceiling(x);
+    REQUIRE(ccode(*p) == "ceil(x)");
+    p = erf(x);
+    REQUIRE(ccode(*p) == "erf(x)");
 }
 
 TEST_CASE("Relationals", "[ccode]")
@@ -87,4 +134,12 @@ TEST_CASE("Piecewise", "[ccode]")
 
     REQUIRE(ccode(*p) == "((x <= 2) ? (\n   x\n)\n: ((x > 2 && x <= 5) ? (\n   "
                          "y\n)\n: (\n   x + y\n)))");
+}
+
+TEST_CASE_("libm_functions", "[ccode]")
+{
+    auto x = symbol("x");
+    auto y = symbol("y");
+    auto sin_x = sin(x);
+    REQUIRE(ccode(*sin_x) == "sin(x)")
 }
