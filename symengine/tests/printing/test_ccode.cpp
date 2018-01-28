@@ -89,8 +89,9 @@ TEST_CASE("Functions", "[ccode]")
     REQUIRE(ccode(*p) == "tan(x)");
     p = atan2(x, y);
     REQUIRE(ccode(*p) == "atan2(x, y)");
-    //p = exp(x);
-    //REQUIRE(ccode(*p) == "exp(x)");  // currently pow(M_E, x) which is technically correct
+    // p = exp(x);
+    // REQUIRE(ccode(*p) == "exp(x)");  // currently pow(M_E, x) which is
+    // technically correct
     p = log(x);
     REQUIRE(ccode(*p) == "log(x)");
     p = sinh(x);

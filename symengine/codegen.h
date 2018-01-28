@@ -136,19 +136,21 @@ public:
     void bvisit(const Max &x)
     {
         std::ostringstream s;
-        const auto& args = x.get_args();
+        const auto &args = x.get_args();
         switch (args.size()) {
-        case 0:
-            throw SymEngineException("Impossible");
-        case 1:
-            s << apply(args[0]); break;
-        case 2:
-            s << "fmax(" << apply(args[0]) << ", " << apply(args[1]) << ")"; break;
-        default:
-            {
+            case 0:
+                throw SymEngineException("Impossible");
+            case 1:
+                s << apply(args[0]);
+                break;
+            case 2:
+                s << "fmax(" << apply(args[0]) << ", " << apply(args[1]) << ")";
+                break;
+            default: {
                 vec_basic inner_args(args.begin() + 1, args.end());
                 auto inner = max(inner_args);
-                s << "fmax(" << apply(args[0]) << ", " << apply(inner) << ")"; break;
+                s << "fmax(" << apply(args[0]) << ", " << apply(inner) << ")";
+                break;
             }
         }
         str_ = s.str();
@@ -156,19 +158,21 @@ public:
     void bvisit(const Min &x)
     {
         std::ostringstream s;
-        const auto& args = x.get_args();
+        const auto &args = x.get_args();
         switch (args.size()) {
-        case 0:
-            throw SymEngineException("Impossible");
-        case 1:
-            s << apply(args[0]); break;
-        case 2:
-            s << "fmin(" << apply(args[0]) << ", " << apply(args[1]) << ")"; break;
-        default:
-            {
+            case 0:
+                throw SymEngineException("Impossible");
+            case 1:
+                s << apply(args[0]);
+                break;
+            case 2:
+                s << "fmin(" << apply(args[0]) << ", " << apply(args[1]) << ")";
+                break;
+            default: {
                 vec_basic inner_args(args.begin() + 1, args.end());
                 auto inner = min(inner_args);
-                s << "fmin(" << apply(args[0]) << ", " << apply(inner) << ")"; break;
+                s << "fmin(" << apply(args[0]) << ", " << apply(inner) << ")";
+                break;
             }
         }
         str_ = s.str();
