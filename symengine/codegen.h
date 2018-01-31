@@ -308,7 +308,7 @@ public:
         } else if (eq(*b, *rational(1, 3))) {
             o << "Math.cbrt(" << apply(a) << ")";
 
-        } else if (eq(*a, *E)){
+        } else if (eq(*a, *E)) {
             o << "Math.exp(" << apply(b) << ")";
         } else {
             o << "Math.pow(" << apply(a) << ", " << apply(b) << ")";
