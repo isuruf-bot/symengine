@@ -218,12 +218,12 @@ void LLVMDoubleVisitor::init(const vec_basic &inputs, const vec_basic &outputs,
     // Validate the generated code, checking for consistency.
     llvm::verifyFunction(*F);
 
-//     std::cout << "LLVM IR" << std::endl;
-// #if (LLVM_VERSION_MAJOR < 5)
-//     module->dump();
-// #else
-//     module->print(llvm::errs(), nullptr);
-// #endif
+    //     std::cout << "LLVM IR" << std::endl;
+    // #if (LLVM_VERSION_MAJOR < 5)
+    //     module->dump();
+    // #else
+    //     module->print(llvm::errs(), nullptr);
+    // #endif
 
     // Optimize the function.
     fpm->run(*F);
