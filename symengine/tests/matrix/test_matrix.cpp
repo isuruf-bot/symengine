@@ -36,8 +36,7 @@ TEST_CASE("test_get_set(): matrices", "[matrices]")
 {
     // Test for DenseMatirx
     vec_basic elems{integer(1), integer(0), integer(-1), integer(-2)};
-    DenseMatrix A
-        = DenseMatrix(2, 2, elems);
+    DenseMatrix A = DenseMatrix(2, 2, elems);
 
     REQUIRE(unified_eq(elems, A.flat()));
     REQUIRE(eq(*A.get(0, 0), *integer(1)));
