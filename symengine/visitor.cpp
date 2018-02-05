@@ -88,7 +88,7 @@ public:
         }
         s.insert(set_.begin(), set_.end());
         for (const auto &p : x.get_point()) {
-            if(v.find(p->rcp_from_this()) == v.end()) {
+            if (v.find(p->rcp_from_this()) == v.end()) {
                 v.insert(p->rcp_from_this());
                 p->accept(*this);
             }
