@@ -313,7 +313,7 @@ public:
                 Mul::dict_add_term_new(outArg(coef), d, exp, t);
             }
         }
-        if (fast_exec) { 
+        if (fast_exec) {
             result_ = Mul::from_dict(coef, std::move(d));
             return;
         }
@@ -329,31 +329,37 @@ public:
                     RCP<const Basic> diff_;
                     if (it != dict.end())
                         diff_ = sub(it->second, p.second);
-                    if (it == dict.end() || down_cast<const Number &>(*diff_).is_negative()) {
-                            exists = false;
-                            break;
+                    if (it == dict.end()
+                        || down_cast<const Number &>(*diff_).is_negative()) {
+                        exists = false;
+                        break;
                     } else {
                         if (!down_cast<const Number &>(*diff_).is_zero())
-                            Mul::dict_add_term_new(outArg(coef), d, sub(it->second, p.second), p.first);
+                            Mul::dict_add_term_new(outArg(coef), d,
+                                                   sub(it->second, p.second),
+                                                   p.first);
                     }
                 }
                 if (exists) {
                     for (const auto &p : dict) {
                         auto it = subst->get_dict().find(p.first);
                         if (it == subst->get_dict().end())
-                            Mul::dict_add_term_new(outArg(coef), d, p.second, p.first);
-                        }
+                            Mul::dict_add_term_new(outArg(coef), d, p.second,
+                                                   p.first);
+                    }
                     if (is_a_Number(*rep)) {
                         if (down_cast<const Number &>(*rep).is_zero()) {
                             result_ = rep;
                             return;
                         }
-                        imulnum(outArg(coef), rcp_static_cast<const Number>(rep));
+                        imulnum(outArg(coef),
+                                rcp_static_cast<const Number>(rep));
                     } else if (is_a<Mul>(*rep)) {
                         RCP<const Mul> tmp = rcp_static_cast<const Mul>(rep);
                         imulnum(outArg(coef), tmp->get_coef());
                         for (const auto &q : tmp->get_dict()) {
-                            Mul::dict_add_term_new(outArg(coef), d, q.second, q.first);
+                            Mul::dict_add_term_new(outArg(coef), d, q.second,
+                                                   q.first);
                         }
                     } else {
                         RCP<const Basic> exp, t;
@@ -370,21 +376,29 @@ public:
                 if (is_a_Number(*sub1_exp)) {
                     for (const auto &p : dict) {
                         auto diff_ = sub(p.second, sub1_exp);
-                        if (eq(*sub1_base, *(p.first)) and eq(*sub1_exp, *p.second)) {
+                        if (eq(*sub1_base, *(p.first))
+                            and eq(*sub1_exp, *p.second)) {
                             exists = true;
-                        } else if (eq(*sub1_base, *(p.first)) and down_cast<const Number &>(*diff_).is_positive()) {
+                        } else if (eq(*sub1_base, *(p.first))
+                                   and down_cast<const Number &>(*diff_)
+                                           .is_positive()) {
                             exists = true;
-                            Mul::dict_add_term_new(outArg(coef), d, sub(p.second, sub1_exp), p.first);
+                            Mul::dict_add_term_new(outArg(coef), d,
+                                                   sub(p.second, sub1_exp),
+                                                   p.first);
                         } else {
-                            Mul::dict_add_term_new(outArg(coef), d, p.second, p.first);
+                            Mul::dict_add_term_new(outArg(coef), d, p.second,
+                                                   p.first);
                         }
                     }
                 } else {
                     for (const auto &p : dict) {
-                        if (eq(*sub1_base, *(p.first)) and eq(*sub1_exp, *p.second)) {
+                        if (eq(*sub1_base, *(p.first))
+                            and eq(*sub1_exp, *p.second)) {
                             exists = true;
                         } else {
-                            Mul::dict_add_term_new(outArg(coef), d, p.second, p.first);
+                            Mul::dict_add_term_new(outArg(coef), d, p.second,
+                                                   p.first);
                         }
                     }
                 }
@@ -394,12 +408,14 @@ public:
                             result_ = rep;
                             return;
                         }
-                        imulnum(outArg(coef), rcp_static_cast<const Number>(rep));
+                        imulnum(outArg(coef),
+                                rcp_static_cast<const Number>(rep));
                     } else if (is_a<Mul>(*rep)) {
                         RCP<const Mul> tmp = rcp_static_cast<const Mul>(rep);
                         imulnum(outArg(coef), tmp->get_coef());
                         for (const auto &q : tmp->get_dict()) {
-                            Mul::dict_add_term_new(outArg(coef), d, q.second, q.first);
+                            Mul::dict_add_term_new(outArg(coef), d, q.second,
+                                                   q.first);
                         }
                     } else {
                         RCP<const Basic> exp, t;
@@ -407,17 +423,20 @@ public:
                         Mul::dict_add_term_new(outArg(coef), d, exp, t);
                     }
                 } else
-                    d = x.get_dict();                
-            } else if (is_a<Symbol>(*sub1)){
+                    d = x.get_dict();
+            } else if (is_a<Symbol>(*sub1)) {
                 exists = false;
                 for (const auto &p : dict) {
                     if (eq(*sub1, *(p.first)) and eq(*one, *p.second)) {
                         exists = true;
-                    } else if (eq(*sub1, *(p.first)) and not eq(*one, *p.second)) {
+                    } else if (eq(*sub1, *(p.first))
+                               and not eq(*one, *p.second)) {
                         exists = true;
-                        Mul::dict_add_term_new(outArg(coef), d, sub(p.second, one), p.first);
+                        Mul::dict_add_term_new(outArg(coef), d,
+                                               sub(p.second, one), p.first);
                     } else {
-                        Mul::dict_add_term_new(outArg(coef), d, p.second, p.first);
+                        Mul::dict_add_term_new(outArg(coef), d, p.second,
+                                               p.first);
                     }
                 }
                 if (exists) {
@@ -426,12 +445,14 @@ public:
                             result_ = rep;
                             return;
                         }
-                        imulnum(outArg(coef), rcp_static_cast<const Number>(rep));
+                        imulnum(outArg(coef),
+                                rcp_static_cast<const Number>(rep));
                     } else if (is_a<Mul>(*rep)) {
                         RCP<const Mul> tmp = rcp_static_cast<const Mul>(rep);
                         imulnum(outArg(coef), tmp->get_coef());
                         for (const auto &q : tmp->get_dict()) {
-                            Mul::dict_add_term_new(outArg(coef), d, q.second, q.first);
+                            Mul::dict_add_term_new(outArg(coef), d, q.second,
+                                                   q.first);
                         }
                     } else {
                         RCP<const Basic> exp, t;
@@ -446,7 +467,8 @@ public:
                     if (eq(*sub1, *(p.first))) {
                         exists = true;
                     } else {
-                        Mul::dict_add_term_new(outArg(coef), d, p.second, p.first);
+                        Mul::dict_add_term_new(outArg(coef), d, p.second,
+                                               p.first);
                     }
                 }
                 if (exists) {
@@ -455,12 +477,14 @@ public:
                             result_ = rep;
                             return;
                         }
-                        imulnum(outArg(coef), rcp_static_cast<const Number>(rep));
+                        imulnum(outArg(coef),
+                                rcp_static_cast<const Number>(rep));
                     } else if (is_a<Mul>(*rep)) {
                         RCP<const Mul> tmp = rcp_static_cast<const Mul>(rep);
                         imulnum(outArg(coef), tmp->get_coef());
                         for (const auto &q : tmp->get_dict()) {
-                            Mul::dict_add_term_new(outArg(coef), d, q.second, q.first);
+                            Mul::dict_add_term_new(outArg(coef), d, q.second,
+                                                   q.first);
                         }
                     } else {
                         RCP<const Basic> exp, t;
