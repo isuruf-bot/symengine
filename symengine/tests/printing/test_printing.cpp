@@ -572,11 +572,17 @@ TEST_CASE("test_mathml()", "[mathml]")
     RCP<const Basic> x = parse("x^2");
     REQUIRE(mathml(*x) == "<apply><power/><ci>x</ci><cn>2</cn></apply>");
     RCP<const Basic> y = parse("3/2 * y");
-    REQUIRE(mathml(*y) == "<apply><times/><cn type=\"rational\">3<sep/>2</cn><ci>y</ci></apply>");
+    REQUIRE(mathml(*y) == "<apply><times/><cn "
+                          "type=\"rational\">3<sep/>2</cn><ci>y</ci></apply>");
     RCP<const Basic> z = parse("x^(y^(5/3))");
-    REQUIRE(mathml(*z) == "<apply><power/><ci>x</ci><apply><power/><ci>y</ci><cn type=\"rational\">5<sep/>3</cn></apply></apply>");
+    REQUIRE(mathml(*z) == "<apply><power/><ci>x</ci><apply><power/><ci>y</"
+                          "ci><cn "
+                          "type=\"rational\">5<sep/>3</cn></apply></apply>");
     RCP<const Basic> w = parse("1 + 4 * x * y");
-    REQUIRE(mathml(*w) == "<apply><plus/><cn>1</cn><apply><times/><cn>4</cn><ci>x</ci><ci>y</ci></apply></apply>");
+    REQUIRE(mathml(*w) == "<apply><plus/><cn>1</cn><apply><times/><cn>4</"
+                          "cn><ci>x</ci><ci>y</ci></apply></apply>");
     RCP<const Basic> v = parse("1 + 4 * x - y");
-    REQUIRE(mathml(*v) == "<apply><plus/><cn>1</cn><apply><times/><cn>-1</cn><ci>y</ci></apply><apply><times/><cn>4</cn><ci>x</ci></apply></apply>");
+    REQUIRE(mathml(*v) == "<apply><plus/><cn>1</cn><apply><times/><cn>-1</"
+                          "cn><ci>y</ci></apply><apply><times/><cn>4</"
+                          "cn><ci>x</ci></apply></apply>");
 }

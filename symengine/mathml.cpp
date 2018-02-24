@@ -4,12 +4,12 @@
 namespace SymEngine
 {
 
-void MathMLPrinter::bvisit(const Basic &x) 
+void MathMLPrinter::bvisit(const Basic &x)
 {
     throw SymEngineException("Error: not supported");
 }
 
-void MathMLPrinter::bvisit(const Symbol &x) 
+void MathMLPrinter::bvisit(const Symbol &x)
 {
     s << "<ci>" << x.get_name() << "</ci>";
 }
@@ -22,7 +22,8 @@ void MathMLPrinter::bvisit(const Integer &x)
 void MathMLPrinter::bvisit(const Rational &x)
 {
     const auto &rational = x.as_rational_class();
-    s << "<cn type=\"rational\">" << get_num(rational) << "<sep/>" << get_den(rational) << "</cn>";
+    s << "<cn type=\"rational\">" << get_num(rational) << "<sep/>"
+      << get_den(rational) << "</cn>";
 }
 
 void MathMLPrinter::bvisit(const Add &x)
@@ -59,10 +60,9 @@ std::string MathMLPrinter::apply(const Basic &b)
     return s.str();
 }
 
-std::string mathml(const Basic &x) 
+std::string mathml(const Basic &x)
 {
     MathMLPrinter m;
     return m.apply(x);
 }
-
 }
