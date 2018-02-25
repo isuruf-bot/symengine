@@ -23,7 +23,8 @@ std::vector<std::string> init_mathml_printer_names()
     names[ASECH] = "arcsech";
     return names;
 }
-const std::vector<std::string> MathMLPrinter::names_ = init_mathml_printer_names();
+const std::vector<std::string> MathMLPrinter::names_
+    = init_mathml_printer_names();
 
 void MathMLPrinter::bvisit(const Basic &x)
 {
@@ -97,8 +98,8 @@ void MathMLPrinter::bvisit(const EmptySet &x)
 void MathMLPrinter::bvisit(const FiniteSet &x)
 {
     s << "<set>";
-    const auto& args = x.get_args();
-    for (const auto& arg : args) {
+    const auto &args = x.get_args();
+    for (const auto &arg : args) {
         arg->accept(*this);
     }
     s << "</set>";

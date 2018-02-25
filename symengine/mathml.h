@@ -54,17 +54,17 @@ public:
     //     void bvisit(const UIntPolyPiranha &x);
     //     void bvisit(const URatPolyPiranha &x);
     // // #endif
-        void bvisit(const Constant &x);
-        void bvisit(const Function &x);
-        void bvisit(const FunctionSymbol &x);
-        // void bvisit(const Derivative &x);
+    void bvisit(const Constant &x);
+    void bvisit(const Function &x);
+    void bvisit(const FunctionSymbol &x);
+    // void bvisit(const Derivative &x);
     //     void bvisit(const Subs &x);
     //     void bvisit(const RealDouble &x);
     //     void bvisit(const ComplexDouble &x);
-        void bvisit(const Equality &x);
-        void bvisit(const Unequality &x);
-        void bvisit(const LessThan &x);
-        void bvisit(const StrictLessThan &x);
+    void bvisit(const Equality &x);
+    void bvisit(const Unequality &x);
+    void bvisit(const LessThan &x);
+    void bvisit(const StrictLessThan &x);
     // #ifdef HAVE_SYMENGINE_MPFR
     //     void bvisit(const RealMPFR &x);
     // #endif
