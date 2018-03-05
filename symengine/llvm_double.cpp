@@ -60,7 +60,8 @@ llvm::Value *LLVMDoubleVisitor::apply(const Basic &b)
 void LLVMDoubleVisitor::init(const vec_basic &x, const Basic &b,
                              bool symbolic_cse, int opt_level)
 {
-    init(x, b, symbolic_cse, LLVMDoubleVisitor::create_default_passes(opt_level));
+    init(x, b, symbolic_cse,
+         LLVMDoubleVisitor::create_default_passes(opt_level));
 }
 
 void LLVMDoubleVisitor::init(const vec_basic &x, const Basic &b,
@@ -156,10 +157,10 @@ std::vector<llvm::Pass *> LLVMDoubleVisitor::create_default_passes(int optlevel)
 }
 
 void LLVMDoubleVisitor::init(const vec_basic &inputs, const vec_basic &outputs,
-                             const bool symbolic_cse,
-                             int opt_level)
+                             const bool symbolic_cse, int opt_level)
 {
-    init(inputs, outputs, symbolic_cse, LLVMDoubleVisitor::create_default_passes(opt_level));
+    init(inputs, outputs, symbolic_cse,
+         LLVMDoubleVisitor::create_default_passes(opt_level));
 }
 
 void LLVMDoubleVisitor::init(const vec_basic &inputs, const vec_basic &outputs,

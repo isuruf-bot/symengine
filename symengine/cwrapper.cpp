@@ -1572,7 +1572,8 @@ CLLVMDoubleVisitor *llvm_double_visitor_new()
 }
 
 void llvm_double_visitor_init(CLLVMDoubleVisitor *self, const CVecBasic *args,
-                              const CVecBasic *exprs, int perform_cse, int opt_level)
+                              const CVecBasic *exprs, int perform_cse,
+                              int opt_level)
 {
     self->m.init(args->m, exprs->m, perform_cse, opt_level);
 }

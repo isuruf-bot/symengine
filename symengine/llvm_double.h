@@ -70,17 +70,13 @@ protected:
 public:
     llvm::Value *apply(const Basic &b);
     void init(const vec_basic &x, const Basic &b,
-              const bool symbolic_cse = false,
-              int opt_level = 2);
-    void init(const vec_basic &x, const Basic &b,
-              const bool symbolic_cse,
+              const bool symbolic_cse = false, int opt_level = 2);
+    void init(const vec_basic &x, const Basic &b, const bool symbolic_cse,
               const std::vector<llvm::Pass *> &passes);
     void init(const vec_basic &inputs, const vec_basic &outputs,
-              const bool symbolic_cse = false,
-              int opt_level = 2);
+              const bool symbolic_cse = false, int opt_level = 2);
     void init(const vec_basic &inputs, const vec_basic &outputs,
-              const bool symbolic_cse,
-              const std::vector<llvm::Pass *> &passes);
+              const bool symbolic_cse, const std::vector<llvm::Pass *> &passes);
 
     static std::vector<llvm::Pass *> create_default_passes(int optlevel);
 
