@@ -383,18 +383,18 @@ CSRMatrix CSRMatrix::jacobian(const DenseMatrix &A, const DenseMatrix &x)
     unsigned nrows = A.row_, ncols = x.row_;
     std::vector<unsigned> p, j;
     vec_basic elems;
-    p.reserve(nrows+1);
+    p.reserve(nrows + 1);
     j.reserve(nrows);
     elems.reserve(nrows);
     p.push_back(0);
-    for (const auto &dx : x.m_){
+    for (const auto &dx : x.m_) {
         if (!is_a<Symbol>(*dx)) {
             throw SymEngineException("'x' must contain Symbols only");
         }
     }
-    for (unsigned ri = 0; ri < nrows; ++ri){
+    for (unsigned ri = 0; ri < nrows; ++ri) {
         p.push_back(p.back());
-        for (unsigned ci = 0; ci < ncols; ++ci){
+        for (unsigned ci = 0; ci < ncols; ++ci) {
             const RCP<const Symbol> dx
                 = rcp_static_cast<const Symbol>(x.m_[ci]);
             auto elem = A.m_[ri]->diff(dx);
