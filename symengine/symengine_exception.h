@@ -1,7 +1,6 @@
 #ifndef SYMENGINE_EXCEPTION_H
 #define SYMENGINE_EXCEPTION_H
 
-
 #ifdef __cplusplus
 extern "C" {
 #endif
