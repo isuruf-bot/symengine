@@ -88,20 +88,22 @@ TEST_CASE("Negative of a UExprPoly", "[UExprPoly]")
     UExprDict adict_({{0, 1}, {1, symbol("a")}, {2, symbol("c")}});
     const UExprPoly a(x, std::move(adict_));
     {
-        auto check_map_str = [](std::string to_chk, std::vector<std::string> key,
-                                std::vector<std::string> val) {
-            if (key.size() != val.size())
-                return false;
-            for (unsigned i = 0; i < key.size(); i++) {
-                if (to_chk.find(key[i] + std::string(": " + val[i]))
-                    == std::string::npos)
-                    return false;
-            }
-            return true;
-        };
+        auto check_map_str
+            = [](std::string to_chk, std::vector<std::string> key,
+                 std::vector<std::string> val) {
+                  if (key.size() != val.size())
+                      return false;
+                  for (unsigned i = 0; i < key.size(); i++) {
+                      if (to_chk.find(key[i] + std::string(": " + val[i]))
+                          == std::string::npos)
+                          return false;
+                  }
+                  return true;
+              };
         std::stringstream buffer;
         buffer << adict_;
-        bool buffer_check = check_map_str(buffer.str(), {"0", "1", "2"}, {"1", "a", "c"});
+        bool buffer_check
+            = check_map_str(buffer.str(), {"0", "1", "2"}, {"1", "a", "c"});
         REQUIRE(buffer_check);
     }
 
