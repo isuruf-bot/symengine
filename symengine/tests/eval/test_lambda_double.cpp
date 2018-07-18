@@ -106,8 +106,8 @@ TEST_CASE("Evaluate to double", "[lambda_double]")
     auto int1 = interval(NegInf, integer(2), true, false);
     auto int2 = interval(integer(2), integer(5), true, false);
     r = piecewise({{x, contains(x, int1)},
-                  {y, contains(x, int2)},
-                  {add(x, y), boolTrue}});
+                   {y, contains(x, int2)},
+                   {add(x, y), boolTrue}});
     v.init({x, y}, *r);
     d = v.call({1.1, 3.3});
     REQUIRE(::fabs(d - 1.1) < 1e-12);
