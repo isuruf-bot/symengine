@@ -56,7 +56,6 @@
 namespace // anonymous
 {
 
-
 enum {
     STACK_EXPANSION = 5 // size to expand the state-stack with when
                         // full
