@@ -763,7 +763,8 @@ void reduced_row_echelon_form(const DenseMatrix &A, DenseMatrix &b,
     }
     unsigned row = 0;
     for (unsigned col = 0; col < b.col_ && row < b.row_; col++) {
-        if (eq(*zero, *b.get(row, col))) continue;
+        if (eq(*zero, *b.get(row, col)))
+            continue;
         pivot_cols.push_back(col);
         row++;
     }

@@ -479,8 +479,8 @@ void zeros(DenseMatrix &A);
 
 // Reduced row echelon form and returns the cols with pivots
 void reduced_row_echelon_form(const DenseMatrix &A, DenseMatrix &B,
-                                         vec_uint &pivot_cols,
-                                         bool normalize_last = false);
+                              vec_uint &pivot_cols,
+                              bool normalize_last = false);
 
 // Returns true if `b` is exactly the type T.
 // Here T can be a DenseMatrix, CSRMatrix, etc.
