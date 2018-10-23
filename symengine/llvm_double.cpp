@@ -162,9 +162,9 @@ std::vector<llvm::Pass *> LLVMDoubleVisitor::create_default_passes(int optlevel)
     if (optlevel > 2) {
         passes.push_back(llvm::createSLPVectorizerPass());
 #if LLVM_VERSION_MAJOR >= 7
-	passes.push_back(llvm::createInstSimplifyLegacyPass());
+        passes.push_back(llvm::createInstSimplifyLegacyPass());
 #else
-	passes.push_back(llvm::createInstructionSimplifierPass());
+        passes.push_back(llvm::createInstructionSimplifierPass());
 #endif
     }
     return passes;
