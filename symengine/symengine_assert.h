@@ -21,7 +21,7 @@
 #endif // !defined(SYMENGINE_ASSERT)
 
 #if !defined(SYMENGINE_ASSERT_MSG)
-#define SYMENGINE_ASSERT_MSG(cond,msg)                                         \
+#define SYMENGINE_ASSERT_MSG(cond, msg)                                        \
     {                                                                          \
         if (!(cond)) {                                                         \
             std::cerr << "SYMENGINE_ASSERT failed: " << __FILE__               \
