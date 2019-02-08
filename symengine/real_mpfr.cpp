@@ -11,10 +11,12 @@
 namespace SymEngine
 {
 
-RealMPFR::RealMPFR(mpfr_class i)
-    : i{std::move(i)} {SYMENGINE_ASSIGN_TYPEID()}
+RealMPFR::RealMPFR(mpfr_class i) : i{std::move(i)}
+{
+    SYMENGINE_ASSIGN_TYPEID()
+}
 
-      hash_t RealMPFR::__hash__() const
+hash_t RealMPFR::__hash__() const
 {
     hash_t seed = REAL_MPFR;
     hash_combine_impl(seed, i.get_mpfr_t());

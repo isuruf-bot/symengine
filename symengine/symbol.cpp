@@ -4,10 +4,12 @@
 namespace SymEngine
 {
 
-Symbol::Symbol(const std::string &name)
-    : name_{name} {SYMENGINE_ASSIGN_TYPEID()}
+Symbol::Symbol(const std::string &name) : name_{name}
+{
+    SYMENGINE_ASSIGN_TYPEID()
+}
 
-      hash_t Symbol::__hash__() const
+hash_t Symbol::__hash__() const
 {
     hash_t seed = 0;
     hash_combine(seed, name_);
