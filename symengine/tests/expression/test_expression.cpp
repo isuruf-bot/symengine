@@ -79,8 +79,14 @@ TEST_CASE("Conversion of Expression", "[Expression]")
     REQUIRE(static_cast<int>(f_x.subs({{x, integer(2)}})) == 4);
     REQUIRE(static_cast<double>(f_x.subs({{x, real_double(3.5)}})) == 12.25);
     REQUIRE(static_cast<float>(f_x.subs({{x, real_double(3.5)}})) == 12.25f);
-    REQUIRE(std::abs(static_cast<std::complex<double>>(f_x.subs({{x, complex_double({0.0,2.0})}})) - std::complex<double>(-4,0)) < 1e-12);
-    REQUIRE(std::abs(static_cast<std::complex<float>>(f_x.subs({{x, complex_double({0.0f,2.0f})}})) - std::complex<float>(-4,0)) < 1e-12);
+    REQUIRE(std::abs(static_cast<std::complex<double>>(
+                         f_x.subs({{x, complex_double({0.0, 2.0})}}))
+                     - std::complex<double>(-4, 0))
+            < 1e-12);
+    REQUIRE(std::abs(static_cast<std::complex<float>>(
+                         f_x.subs({{x, complex_double({0.0f, 2.0f})}}))
+                     - std::complex<float>(-4, 0))
+            < 1e-12);
 }
 
 TEST_CASE("Differentiation of Expression", "[Expression]")

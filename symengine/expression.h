@@ -150,8 +150,7 @@ public:
         return Expression(sdiff(m_basic, x));
     }
     //! Substitution
-    Expression
-    subs (const map_basic_basic &subs_map) const
+    Expression subs(const map_basic_basic &subs_map) const
     {
         return Expression(m_basic->subs(subs_map));
     }
