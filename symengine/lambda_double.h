@@ -590,9 +590,10 @@ public:
 
     void bvisit(const Piecewise &pw)
     {
-        SYMENGINE_ASSERT_MSG(eq(*pw.get_vec().back().second, *boolTrue),
-                "LambdaDouble requires a (Expr, True) at the end of Piecewise");
-        
+        SYMENGINE_ASSERT_MSG(
+            eq(*pw.get_vec().back().second, *boolTrue),
+            "LambdaDouble requires a (Expr, True) at the end of Piecewise");
+
         std::vector<fn> applys;
         std::vector<fn> preds;
         for (const auto &expr_pred : pw.get_vec()) {
