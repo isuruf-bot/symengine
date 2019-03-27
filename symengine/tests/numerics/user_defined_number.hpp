@@ -358,10 +358,9 @@ public:
               SymEngine::make_rcp<const LAVectorWrapper<VectorType>>(vec))
     {
     }
-    template <class T, typename = typename std::enable_if<!std::is_same<T,VectorType>::value>::type>
-    LAVectorExpression(
-        const T n)
-        : SymEngine::Expression::Expression(n)
+    template <class T, typename = typename std::
+                           enable_if<!std::is_same<T, VectorType>::value>::type>
+    LAVectorExpression(const T n) : SymEngine::Expression::Expression(n)
     {
     }
 
