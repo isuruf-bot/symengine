@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
     for (int i = 0; i < 5000; i++) {
         text = text + " * " + t0;
     }
-    //std::cout << text << std::endl;
+    // std::cout << text << std::endl;
 
     N = 1;
     auto t1 = std::chrono::high_resolution_clock::now();
