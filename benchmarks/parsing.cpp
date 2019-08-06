@@ -28,12 +28,12 @@ int main(int argc, char *argv[])
 
     std::cout << "Subsequent calls" << std::endl;
 
-    for (int i = 0; i < 10; i++ ) {
+    for (int i = 0; i < 10; i++) {
         t1 = std::chrono::high_resolution_clock::now();
         a = parse("0");
         t2 = std::chrono::high_resolution_clock::now();
-        std::cout
-                  << std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1)
+        std::cout << std::chrono::duration_cast<std::chrono::microseconds>(t2
+                                                                           - t1)
                          .count()
                   << "us ";
     }
