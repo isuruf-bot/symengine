@@ -9,8 +9,6 @@
 #include "sem6.h"
 //#include "sem7.h"
 
-
-
 namespace SymEngine
 {
 
@@ -30,7 +28,5 @@ struct YYSTYPE {
 };
 
 } // namespace SymEngine
-
-
 
 #endif

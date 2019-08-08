@@ -27,5 +27,4 @@ using SymEngine::integer;
 #define INTEGER(x) integer(x)
 #define PRINT(x) std::cout << *x << std::endl
 
-
 #endif

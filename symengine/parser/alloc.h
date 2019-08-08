@@ -3,8 +3,9 @@
 
 #define ALIGNMENT 8
 
-inline size_t align(size_t n) {
-  return (n + ALIGNMENT - 1) & ~(ALIGNMENT - 1);
+inline size_t align(size_t n)
+{
+    return (n + ALIGNMENT - 1) & ~(ALIGNMENT - 1);
 }
 
 class Allocator
@@ -12,8 +13,10 @@ class Allocator
     void *start;
     size_t current_pos;
     size_t size;
+
 public:
-    Allocator(size_t s) {
+    Allocator(size_t s)
+    {
         start = malloc(s);
         if (start == nullptr) {
             throw std::runtime_error("malloc failed.");
@@ -23,7 +26,8 @@ public:
         size = s;
     }
 
-    void *allocate(size_t s) {
+    void *allocate(size_t s)
+    {
         if (start == nullptr) {
             throw std::runtime_error("malloc failed 2.");
         }
@@ -39,13 +43,15 @@ public:
         if (current_pos - (size_t)start > size) {
             throw std::runtime_error("Linear allocator too small.");
         }
-        return (void*)addr;
+        return (void *)addr;
     }
 
-    template <typename T, typename... Args> T* make_new(Args &&... args) {
-        return new(allocate(sizeof(T))) T(std::forward<Args>(args)...);
+    template <typename T, typename... Args>
+    T *make_new(Args &&... args)
+    {
+        return new (allocate(sizeof(T))) T(std::forward<Args>(args)...);
         // To test the default "new", comment the above and uncomment this:
-        //return new T(std::forward<Args>(args)...);
+        // return new T(std::forward<Args>(args)...);
     }
 };
 
