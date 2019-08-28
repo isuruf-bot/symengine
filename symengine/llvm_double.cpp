@@ -50,32 +50,29 @@
 #include <symengine/llvm_double.h>
 #include <symengine/eval_double.h>
 
-namespace {
-    template<typename T>
-    struct has_real_type_llvm : std::false_type {
-    }
-    template<typename T>
-    struct real_type_getter_llvm {
-        static_assert(has_real_type_llvm<T>::value, "LLVM does not support type");
-    }
-    template<>
-    struct real_type_getter_llvm<float> {
-        const static auto& getTy = llvm::Type::getFloatTy;
-    }
-    template<>
-    struct real_type_getter_llvm<double> {
-        const static auto& getTy = llvm::Type::getDoubleTy;
-    }
-    template<>
-    struct real_type_getter_llvm<long double> {
-        const static auto& getTy =
+namespace
+{
+template <typename T>
+struct has_real_type_llvm : std::false_type {
+} template <typename T>
+struct real_type_getter_llvm {
+    static_assert(has_real_type_llvm<T>::value, "LLVM does not support type");
+} template <>
+struct real_type_getter_llvm<float> {
+    const static auto &getTy = llvm::Type::getFloatTy;
+} template <>
+struct real_type_getter_llvm<double> {
+    const static auto &getTy = llvm::Type::getDoubleTy;
+} template <>
+struct real_type_getter_llvm<long double> {
+    const static auto &getTy =
 #ifdef HAVE_SYMENGINE_FP128
         llvm::Type::getFP128Ty
 #else
         llvm::Type::getX86_FP80Ty
 #endif
-            ;
-    }
+        ;
+}
 }
 
 namespace SymEngine
@@ -93,17 +90,15 @@ llvm::Value *LLVMVisitor<T>::apply(const Basic &b)
 }
 
 template <typename T>
-void LLVMVisitor<T>::init(const vec_basic &x, const Basic &b,
-                             bool symbolic_cse, int opt_level)
+void LLVMVisitor<T>::init(const vec_basic &x, const Basic &b, bool symbolic_cse,
+                          int opt_level)
 {
-    init(x, b, symbolic_cse,
-         LLVMVisitor::create_default_passes(opt_level));
+    init(x, b, symbolic_cse, LLVMVisitor::create_default_passes(opt_level));
 }
 
 template <typename T>
-void LLVMVisitor<T>::init(const vec_basic &x, const Basic &b,
-                             bool symbolic_cse,
-                             const std::vector<llvm::Pass *> &passes)
+void LLVMVisitor<T>::init(const vec_basic &x, const Basic &b, bool symbolic_cse,
+                          const std::vector<llvm::Pass *> &passes)
 {
     init(x, {b.rcp_from_this()}, symbolic_cse, passes);
 }
@@ -113,8 +108,8 @@ llvm::Function *LLVMVisitor<T>::get_function_type(llvm::LLVMContext *context)
 {
     std::vector<llvm::Type *> inp;
     for (int i = 0; i < 2; i++) {
-        inp.push_back(
-            llvm::PointerType::get(real_type_getter_llvm<T>::getTy(*context), 0));
+        inp.push_back(llvm::PointerType::get(
+            real_type_getter_llvm<T>::getTy(*context), 0));
     }
     llvm::FunctionType *function_type = llvm::FunctionType::get(
         llvm::Type::getVoidTy(*context), inp, /*isVarArgs=*/false);
@@ -205,7 +200,7 @@ std::vector<llvm::Pass *> LLVMVisitor<T>::create_default_passes(int optlevel)
 
 template <typename T>
 void LLVMVisitor<T>::init(const vec_basic &inputs, const vec_basic &outputs,
-                             const bool symbolic_cse, int opt_level)
+                          const bool symbolic_cse, int opt_level)
 {
     init(inputs, outputs, symbolic_cse,
          LLVMVisitor<T>::create_default_passes(opt_level));
@@ -213,8 +208,8 @@ void LLVMVisitor<T>::init(const vec_basic &inputs, const vec_basic &outputs,
 
 template <typename T>
 void LLVMVisitor<T>::init(const vec_basic &inputs, const vec_basic &outputs,
-                             const bool symbolic_cse,
-                             const std::vector<llvm::Pass *> &passes)
+                          const bool symbolic_cse,
+                          const std::vector<llvm::Pass *> &passes)
 {
     executionengine.reset();
     llvm::InitializeNativeTarget();
@@ -263,7 +258,8 @@ void LLVMVisitor<T>::init(const vec_basic &inputs, const vec_basic &outputs,
             = llvm::ConstantInt::get(llvm::Type::getInt32Ty(*context), i);
         auto ptr = builder->CreateGEP(real_type_getter_llvm<T>::getTy(*context),
                                       input_arg, index);
-        result_ = builder->CreateLoad(real_type_getter_llvm<T>::getTy(*context), ptr);
+        result_ = builder->CreateLoad(real_type_getter_llvm<T>::getTy(*context),
+                                      ptr);
         symbol_ptrs.push_back(result_);
     }
 
@@ -299,8 +295,8 @@ void LLVMVisitor<T>::init(const vec_basic &inputs, const vec_basic &outputs,
     for (unsigned i = 0; i < outputs.size(); i++) {
         auto index
             = llvm::ConstantInt::get(llvm::Type::getInt32Ty(*context), i);
-        auto ptr
-            = builder->CreateGEP(real_type_getter_llvm<T>::getTy(*context), out, index);
+        auto ptr = builder->CreateGEP(real_type_getter_llvm<T>::getTy(*context),
+                                      out, index);
         builder->CreateStore(output_vals[i], ptr);
     }
 
@@ -372,21 +368,21 @@ template <typename T>
 T LLVMVisitor<T>::call(const std::vector<T> &vec)
 {
     T ret;
-    ((T (*)(const T *, T *))func)(vec.data(), &ret);
+    ((T(*)(const T *, T *))func)(vec.data(), &ret);
     return ret;
 }
 
 template <typename T>
 void LLVMVisitor<T>::call(T *outs, const T *inps)
 {
-    ((T (*)(const T *, T *))func)(inps, outs);
+    ((T(*)(const T *, T *))func)(inps, outs);
 }
 
 template <typename T>
 void LLVMVisitor<T>::set_real(T d)
 {
-    result_
-        = llvm::ConstantFP::get(real_type_getter_llvm<T>::getTy(mod->getContext()), d);
+    result_ = llvm::ConstantFP::get(
+        real_type_getter_llvm<T>::getTy(mod->getContext()), d);
 }
 
 template <typename T>
@@ -397,9 +393,9 @@ void LLVMVisitor<T>::bvisit(const Integer &x, bool as_int32)
         result_ = llvm::ConstantInt::get(
             llvm::Type::getInt32Ty(mod->getContext()), d, true);
     } else {
-        result_
-            = llvm::ConstantFP::get(real_type_getter_llvm<T>::getTy(mod->getContext()),
-                                    mp_get_d(x.as_integer_class()));
+        result_ = llvm::ConstantFP::get(
+            real_type_getter_llvm<T>::getTy(mod->getContext()),
+            mp_get_d(x.as_integer_class()));
     }
 }
 
@@ -580,8 +576,8 @@ void LLVMVisitor<T>::bvisit(const Piecewise &x)
     llvm::Value *cond = apply(*cond_basic);
     // check if cond != 0.0
     cond = builder->CreateFCmpONE(
-        cond,
-        llvm::ConstantFP::get(real_type_getter_llvm<T>::getTy(mod->getContext()), 0.0),
+        cond, llvm::ConstantFP::get(
+                  real_type_getter_llvm<T>::getTy(mod->getContext()), 0.0),
         "ifcond");
     llvm::Function *function = builder->GetInsertBlock()->getParent();
     // Create blocks for the then and else cases.  Insert the 'then' block at
@@ -617,8 +613,8 @@ void LLVMVisitor<T>::bvisit(const Piecewise &x)
     // Emit merge block.
     function->getBasicBlockList().push_back(merge_bb);
     builder->SetInsertPoint(merge_bb);
-    llvm::PHINode *phi_node
-        = builder->CreatePHI(real_type_getter_llvm<T>::getTy(mod->getContext()), 2);
+    llvm::PHINode *phi_node = builder->CreatePHI(
+        real_type_getter_llvm<T>::getTy(mod->getContext()), 2);
 
     phi_node->addIncoming(then_value, then_bb);
     phi_node->addIncoming(else_value, else_bb);
@@ -714,7 +710,7 @@ void LLVMVisitor<T>::bvisit(const Log &x)
             }                                                                  \
         }                                                                      \
         result_ = builder->CreateUIToFP(                                       \
-            value, real_type_getter_llvm<T>::getTy(mod->getContext()));                \
+            value, real_type_getter_llvm<T>::getTy(mod->getContext()));        \
     }
 
 SYMENGINE_LOGIC_FUNCTION(And, CreateAnd);
@@ -735,7 +731,7 @@ void LLVMVisitor<T>::bvisit(const Not &x)
         llvm::Value *right = apply(*x.get_arg2());                             \
         result_ = builder->method(left, right);                                \
         result_ = builder->CreateUIToFP(                                       \
-            result_, real_type_getter_llvm<T>::getTy(mod->getContext()));              \
+            result_, real_type_getter_llvm<T>::getTy(mod->getContext()));      \
     }
 
 SYMENGINE_RELATIONAL_FUNCTION(Equality, CreateFCmpOEQ);
@@ -849,14 +845,14 @@ void LLVMVisitor<T>::bvisit(const Symbol &x)
 }
 
 template <typename T>
-llvm::Function *
-LLVMVisitor<T>::get_external_function(const std::string &name, size_t nargs)
+llvm::Function *LLVMVisitor<T>::get_external_function(const std::string &name,
+                                                      size_t nargs)
 {
     std::vector<llvm::Type *> func_args(
         nargs, real_type_getter_llvm<T>::getTy(mod->getContext()));
-    llvm::FunctionType *func_type
-        = llvm::FunctionType::get(real_type_getter_llvm<T>::getTy(mod->getContext()),
-                                  func_args, /*isVarArgs=*/false);
+    llvm::FunctionType *func_type = llvm::FunctionType::get(
+        real_type_getter_llvm<T>::getTy(mod->getContext()), func_args,
+        /*isVarArgs=*/false);
 
     llvm::Function *func = mod->getFunction(name);
     if (!func) {
@@ -998,6 +994,7 @@ void LLVMVisitor<T>::bvisit(const Truncate &x)
     result_ = r;
 }
 
-struct LLVMDoubleVisitor {}; // backward compatibility
+struct LLVMDoubleVisitor {
+}; // backward compatibility
 
 } // namespace SymEngine
