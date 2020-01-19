@@ -446,8 +446,7 @@ TEST_CASE("linsolve", "[Solve]")
     REQUIRE(eq(*solns[1], *zero));
     REQUIRE(eq(*solns[2], *zero));
 
-    solns = linsolve({sub(x, integer(2)), sub(y, integer(3))},
-        {x, y});
+    solns = linsolve({sub(x, integer(2)), sub(y, integer(3))}, {x, y});
 
     REQUIRE(solns.size() == 2);
     REQUIRE(eq(*solns[0], *integer(2)));
