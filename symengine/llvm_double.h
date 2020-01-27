@@ -19,8 +19,8 @@ class MemoryBufferRef;
 class LLVMContext;
 class Pass;
 #if (LLVM_VERSION_MAJOR >= 10)
-template<typename T, typename... Args>
-std::unique_ptr<T> make_unique(Args&&... args)
+template <typename T, typename... Args>
+std::unique_ptr<T> make_unique(Args &&... args)
 {
     return std::make_unique<T>(std::forward<Args>(args)...);
 }
