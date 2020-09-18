@@ -240,8 +240,8 @@ TEST_CASE("Reals : Basic", "[basic]")
     RCP<const Set> r7 = finiteset({real_double(2.0), c1, x});
     RCP<const Set> r8 = finiteset({c1, x});
     RCP<const Set> r9 = set_union({r1, r8});
-    //RCP<const Set> r10 = finiteset({real_double(2.0), x});
-    //RCP<const Set> r11 = set_intersection({r10, r1});
+    // RCP<const Set> r10 = finiteset({real_double(2.0), x});
+    // RCP<const Set> r11 = set_intersection({r10, r1});
 
     REQUIRE(is_a<Reals>(*r1));
     REQUIRE(not is_a<UniversalSet>(*r1));
@@ -256,7 +256,7 @@ TEST_CASE("Reals : Basic", "[basic]")
     REQUIRE(eq(*r3, *r4->set_intersection(r1)));
     REQUIRE(eq(*r3, *r1->set_intersection(r4)));
     // Following doesn't work since we cannot yet create the set intersection
-    //REQUIRE(eq(*r11, *r1->set_intersection(r7)));
+    // REQUIRE(eq(*r11, *r1->set_intersection(r7)));
     REQUIRE(eq(*r1, *r1->set_union(r1)));
     REQUIRE(eq(*r1, *r1->set_union(r2)));
     REQUIRE(eq(*r1, *r2->set_union(r1)));
