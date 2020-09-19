@@ -1755,8 +1755,8 @@ RCP<const Basic> polygonal_number(const RCP<const Basic> &s,
     RCP<const Integer> m2 = integer(-2);
     RCP<const Integer> p2 = integer(2);
     RCP<const Integer> p4 = integer(4);
-    RCP<const Basic> x = div(add(mul(add(s, m2), pow(n, p2)),
-                             mul(add(p4, mul(m1, s)), n)), p2);
+    RCP<const Basic> x = div(
+        add(mul(add(s, m2), pow(n, p2)), mul(add(p4, mul(m1, s)), n)), p2);
     return x;
 }
 
@@ -1767,8 +1767,8 @@ RCP<const Basic> principal_polygonal_root(const RCP<const Basic> &s,
     RCP<const Integer> m4 = integer(-4);
     RCP<const Integer> p2 = integer(2);
     RCP<const Integer> p8 = integer(8);
-    RCP<const Basic> root = sqrt(add(mul(mul(p8, add(s, m2)), x),
-                                     pow(add(s, m4), p2)));
+    RCP<const Basic> root
+        = sqrt(add(mul(mul(p8, add(s, m2)), x), pow(add(s, m4), p2)));
     RCP<const Basic> n = div(add(root, add(s, m4)), mul(p2, add(s, m2)));
     return n;
 }
