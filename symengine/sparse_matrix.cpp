@@ -205,7 +205,7 @@ void CSRMatrix::conjugate(MatrixBase &result) const
         std::vector<unsigned> p(p_), j(j_);
         vec_basic x(x_.size());
         for (unsigned i = 0; i < x_.size(); ++i) {
-            x[i] = SymEngine::conjugate(x_[i]); 
+            x[i] = SymEngine::conjugate(x_[i]);
         }
         r = CSRMatrix(col_, row_, std::move(p), std::move(j), std::move(x));
     } else {
