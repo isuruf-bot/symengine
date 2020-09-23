@@ -185,7 +185,8 @@ void CSRMatrix::mul_matrix(const MatrixBase &other, MatrixBase &result) const
     throw NotImplementedError("Not Implemented");
 }
 
-void CSRMatrix::elementwise_mul_matrix(const MatrixBase &other, MatrixBase &result) const
+void CSRMatrix::elementwise_mul_matrix(const MatrixBase &other,
+                                       MatrixBase &result) const
 {
     if (is_a<CSRMatrix>(result)) {
         auto &o = down_cast<const CSRMatrix &>(other);

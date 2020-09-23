@@ -47,7 +47,8 @@ public:
                             MatrixBase &result) const = 0;
 
     // Matrix elementwise Multiplication
-    virtual void elementwise_mul_matrix(const MatrixBase &other, MatrixBase &result) const = 0;
+    virtual void elementwise_mul_matrix(const MatrixBase &other,
+                                        MatrixBase &result) const = 0;
 
     // Add a scalar
     virtual void add_scalar(const RCP<const Basic> &k,
@@ -139,7 +140,8 @@ public:
     virtual void mul_matrix(const MatrixBase &other, MatrixBase &result) const;
 
     // Matrix elementwise Multiplication
-    virtual void elementwise_mul_matrix(const MatrixBase &other, MatrixBase &result) const;
+    virtual void elementwise_mul_matrix(const MatrixBase &other,
+                                        MatrixBase &result) const;
 
     // Add a scalar
     virtual void add_scalar(const RCP<const Basic> &k,
@@ -206,8 +208,9 @@ public:
                                  const RCP<const Basic> &k, DenseMatrix &B);
     friend void mul_dense_dense(const DenseMatrix &A, const DenseMatrix &B,
                                 DenseMatrix &C);
-    friend void elementwise_mul_dense_dense(const DenseMatrix &A, const DenseMatrix &B,
-                                DenseMatrix &C);
+    friend void elementwise_mul_dense_dense(const DenseMatrix &A,
+                                            const DenseMatrix &B,
+                                            DenseMatrix &C);
     friend void mul_dense_scalar(const DenseMatrix &A,
                                  const RCP<const Basic> &k, DenseMatrix &C);
     friend void conjugate_dense(const DenseMatrix &A, DenseMatrix &B);
@@ -360,7 +363,8 @@ public:
     virtual void mul_matrix(const MatrixBase &other, MatrixBase &result) const;
 
     // Matrix elementwise Multiplication
-    virtual void elementwise_mul_matrix(const MatrixBase &other, MatrixBase &result) const;
+    virtual void elementwise_mul_matrix(const MatrixBase &other,
+                                        MatrixBase &result) const;
 
     // Add a scalar
     virtual void add_scalar(const RCP<const Basic> &k,

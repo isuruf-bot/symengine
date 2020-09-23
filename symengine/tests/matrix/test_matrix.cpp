@@ -243,7 +243,8 @@ TEST_CASE("test_dense_dense_multiplication(): matrices", "[matrices]")
                                         mul(symbol("w"), symbol("z")))}));
 }
 
-TEST_CASE("test_elementwise_dense_dense_multiplication(): matrices", "[matrices]")
+TEST_CASE("test_elementwise_dense_dense_multiplication(): matrices",
+          "[matrices]")
 {
     DenseMatrix A
         = DenseMatrix(2, 2, {integer(1), integer(0), integer(0), integer(1)});
@@ -259,21 +260,24 @@ TEST_CASE("test_elementwise_dense_dense_multiplication(): matrices", "[matrices]
     DenseMatrix C = DenseMatrix(1, 4);
     A.elementwise_mul_matrix(B, C);
 
-    REQUIRE(C == DenseMatrix(1, 4, {integer(1), integer(6), integer(21), integer(-20)}));
+    REQUIRE(C == DenseMatrix(1, 4, {integer(1), integer(6), integer(21),
+                                    integer(-20)}));
 
     A = DenseMatrix(3, 2, {symbol("a"), symbol("b"), symbol("c"), symbol("p"),
                            symbol("q"), symbol("r")});
-    B = DenseMatrix(3, 2, {symbol("x"), symbol("y"), symbol("z"), symbol("w"), symbol("k"), symbol("f")});
+    B = DenseMatrix(3, 2, {symbol("x"), symbol("y"), symbol("z"), symbol("w"),
+                           symbol("k"), symbol("f")});
     C = DenseMatrix(3, 2);
     B.elementwise_mul_matrix(A, C);
 
-    REQUIRE(C == DenseMatrix(3, 2, {mul(symbol("a"), symbol("x")),
-                                    mul(symbol("b"), symbol("y")),
-                                    mul(symbol("c"), symbol("z")),
-                                    mul(symbol("p"), symbol("w")),
-                                    mul(symbol("q"), symbol("k")),
-                                    mul(symbol("r"), symbol("f")),
-                                    }));
+    REQUIRE(C == DenseMatrix(3, 2, {
+                                       mul(symbol("a"), symbol("x")),
+                                       mul(symbol("b"), symbol("y")),
+                                       mul(symbol("c"), symbol("z")),
+                                       mul(symbol("p"), symbol("w")),
+                                       mul(symbol("q"), symbol("k")),
+                                       mul(symbol("r"), symbol("f")),
+                                   }));
 }
 
 TEST_CASE("test_mul_dense_scalar(): matrices", "[matrices]")

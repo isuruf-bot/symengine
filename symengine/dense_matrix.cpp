@@ -100,9 +100,11 @@ void DenseMatrix::mul_matrix(const MatrixBase &other, MatrixBase &result) const
     }
 }
 
-void DenseMatrix::elementwise_mul_matrix(const MatrixBase &other, MatrixBase &result) const
+void DenseMatrix::elementwise_mul_matrix(const MatrixBase &other,
+                                         MatrixBase &result) const
 {
-    SYMENGINE_ASSERT(row_ == result.nrows() and col_ == result.ncols() and row_ == other.nrows() and col_ == other.ncols());
+    SYMENGINE_ASSERT(row_ == result.nrows() and col_ == result.ncols()
+                     and row_ == other.nrows() and col_ == other.ncols());
 
     if (is_a<DenseMatrix>(other) and is_a<DenseMatrix>(result)) {
         const DenseMatrix &o = down_cast<const DenseMatrix &>(other);
@@ -434,7 +436,8 @@ void mul_dense_dense(const DenseMatrix &A, const DenseMatrix &B, DenseMatrix &C)
     }
 }
 
-void elementwise_mul_dense_dense(const DenseMatrix &A, const DenseMatrix &B, DenseMatrix &C)
+void elementwise_mul_dense_dense(const DenseMatrix &A, const DenseMatrix &B,
+                                 DenseMatrix &C)
 {
     SYMENGINE_ASSERT(A.row_ == B.row_ and A.col_ == B.col_ and A.row_ == C.row_
                      and A.col_ == C.col_);
