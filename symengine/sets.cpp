@@ -284,7 +284,13 @@ RCP<const Set> Reals::set_union(const RCP<const Set> &o) const
 
 RCP<const Set> Reals::set_complement(const RCP<const Set> &o) const
 {
-    return emptyset();
+    if (is_a<EmptySet>(*o) or is_a<Reals>(*o) or is_a<Integers>(*o) or is_a<Interval>(*o)) {
+        return emptyset();
+    }
+    if (is_a<UniversalSet>(*o)) {
+        return make_rcp<const Complement>(o, reals());
+    }
+    return SymEngine::set_complement_helper(rcp_from_this_cast<const Set>(), o);
 }
 
 RCP<const Boolean> Reals::contains(const RCP<const Basic> &a) const

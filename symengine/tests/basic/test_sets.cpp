@@ -246,6 +246,7 @@ TEST_CASE("Reals : Basic", "[basic]")
     // RCP<const Set> r11 = set_intersection({r10, r1});
     RCP<const Set> r12 = universalset();
     RCP<const Set> r13 = emptyset();
+    RCP<const Set> r14 = set_complement(universalset(), reals());
 
     REQUIRE(is_a<Reals>(*r1));
     REQUIRE(not is_a<UniversalSet>(*r1));
@@ -276,6 +277,13 @@ TEST_CASE("Reals : Basic", "[basic]")
     REQUIRE(eq(*r12, *r1->set_union(r12)));
     REQUIRE(eq(*r12, *r12->set_union(r1)));
     REQUIRE(eq(*r1->set_complement(r2), *emptyset()));
+    REQUIRE(eq(*r1->set_complement(r1), *emptyset()));
+    REQUIRE(eq(*r1->set_complement(r13), *emptyset()));
+    REQUIRE(eq(*r1->set_complement(r12), *r14));
+    REQUIRE(eq(*r1->set_complement(r3), *emptyset()));
+    REQUIRE(eq(*r1->set_complement(r4), *r5));
+    REQUIRE(eq(*r12->set_complement(r1), *emptyset()));
+    REQUIRE(eq(*r13->set_complement(r1), *r1));
     REQUIRE(r1->__str__() == "Reals");
     REQUIRE(r1->__hash__() == reals()->__hash__());
     REQUIRE(not r1->is_proper_subset(r1));
