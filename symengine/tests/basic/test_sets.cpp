@@ -316,7 +316,7 @@ TEST_CASE("Integers : Basic", "[basic]")
     RCP<const Set> r7 = finiteset({zero, one, c1, x});
     RCP<const Set> r8 = finiteset({c1, x});
     RCP<const Set> r9 = set_union({r1, r8});
-    RCP<const Set> r10 = emptyset(); 
+    RCP<const Set> r10 = emptyset();
     RCP<const Set> r11 = interval(zero, rat2);
     RCP<const Set> r12 = finiteset({zero, one, integer(2)});
     RCP<const Set> r13 = interval(zero, one, true, true);
