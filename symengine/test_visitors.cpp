@@ -35,7 +35,8 @@ void RealVisitor::bvisit(const Number &x)
 
 void RealVisitor::bvisit(const Constant &x)
 {
-    if (eq(x, *pi) or eq(x, *E) or eq(x, *EulerGamma) or eq(x, *Catalan) or eq(x, *GoldenRatio)) {
+    if (eq(x, *pi) or eq(x, *E) or eq(x, *EulerGamma) or eq(x, *Catalan)
+        or eq(x, *GoldenRatio)) {
         is_real_ = tribool::tritrue;
     } else {
         is_real_ = tribool::indeterminate;
