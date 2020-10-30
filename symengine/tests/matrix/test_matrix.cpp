@@ -2115,8 +2115,10 @@ TEST_CASE("is_zero(): DenseMatrix", "[matrices]")
 {
     DenseMatrix A
         = DenseMatrix(2, 2, {integer(1), integer(2), integer(3), integer(4)});
-    DenseMatrix B = DenseMatrix(2, 2, {integer(0), integer(0), integer(0), integer(0)});
-    DenseMatrix C = DenseMatrix(2, 2, {integer(0), integer(0), symbol("x"), integer(0)});
+    DenseMatrix B
+        = DenseMatrix(2, 2, {integer(0), integer(0), integer(0), integer(0)});
+    DenseMatrix C
+        = DenseMatrix(2, 2, {integer(0), integer(0), symbol("x"), integer(0)});
 
     REQUIRE(is_false(A.is_zero()));
     REQUIRE(is_true(B.is_zero()));
@@ -2125,13 +2127,18 @@ TEST_CASE("is_zero(): DenseMatrix", "[matrices]")
 
 TEST_CASE("is_diagonal(): DenseMatrix", "[matrices]")
 {
-    DenseMatrix A = DenseMatrix(2, 2, {integer(0), integer(0), integer(0), integer(0)});
-    DenseMatrix B = DenseMatrix(2, 2, {integer(1), integer(0), integer(0), integer(2)});
-    DenseMatrix C = DenseMatrix(2, 2, {integer(1), integer(0), integer(0), symbol("x")});
-    DenseMatrix D = DenseMatrix(2, 2, {integer(1), symbol("y"), integer(0), symbol("x")});
+    DenseMatrix A
+        = DenseMatrix(2, 2, {integer(0), integer(0), integer(0), integer(0)});
+    DenseMatrix B
+        = DenseMatrix(2, 2, {integer(1), integer(0), integer(0), integer(2)});
+    DenseMatrix C
+        = DenseMatrix(2, 2, {integer(1), integer(0), integer(0), symbol("x")});
+    DenseMatrix D
+        = DenseMatrix(2, 2, {integer(1), symbol("y"), integer(0), symbol("x")});
     DenseMatrix E = DenseMatrix(3, 4);
     DenseMatrix F = DenseMatrix(1, 1, {integer(1)});
-    DenseMatrix G = DenseMatrix(2, 2, {integer(1), integer(0), integer(1), integer(0)});
+    DenseMatrix G
+        = DenseMatrix(2, 2, {integer(1), integer(0), integer(1), integer(0)});
 
     REQUIRE(is_true(A.is_diagonal()));
     REQUIRE(is_true(B.is_diagonal()));
@@ -2145,8 +2152,10 @@ TEST_CASE("is_diagonal(): DenseMatrix", "[matrices]")
 TEST_CASE("is_real(): DenseMatrix", "[matrices]")
 {
     auto c1 = complex_double(std::complex<double>(8, 1));
-    DenseMatrix A = DenseMatrix(2, 2, {integer(0), integer(0), integer(0), integer(0)});
-    DenseMatrix B = DenseMatrix(2, 2, {integer(1), integer(0), integer(0), symbol("x")});
+    DenseMatrix A
+        = DenseMatrix(2, 2, {integer(0), integer(0), integer(0), integer(0)});
+    DenseMatrix B
+        = DenseMatrix(2, 2, {integer(1), integer(0), integer(0), symbol("x")});
     DenseMatrix C = DenseMatrix(2, 2, {integer(1), integer(0), integer(0), c1});
 
     REQUIRE(is_true(A.is_real()));
@@ -2159,14 +2168,16 @@ TEST_CASE("is_symmetric(): DenseMatrix", "[matrices]")
     auto c1 = complex_double(std::complex<double>(2, 1));
     auto c2 = complex_double(std::complex<double>(2, -1));
     auto c3 = complex_double(std::complex<double>(2, -2));
-    DenseMatrix A = DenseMatrix(2, 2, {integer(0), integer(0), integer(0), integer(0)});
+    DenseMatrix A
+        = DenseMatrix(2, 2, {integer(0), integer(0), integer(0), integer(0)});
     DenseMatrix B = DenseMatrix(2, 2, {integer(2), c1, c2, integer(3)});
     DenseMatrix C = DenseMatrix(2, 2, {symbol("z"), c1, c2, integer(3)});
     DenseMatrix D = DenseMatrix(3, 4);
     DenseMatrix E = DenseMatrix(1, 1, {c1});
     DenseMatrix F = DenseMatrix(1, 1, {integer(2)});
     DenseMatrix G = DenseMatrix(2, 2, {integer(2), c1, c1, integer(3)});
-    DenseMatrix H = DenseMatrix(2, 2, {integer(2), symbol("z"), c1, integer(3)});
+    DenseMatrix H
+        = DenseMatrix(2, 2, {integer(2), symbol("z"), c1, integer(3)});
 
     REQUIRE(is_true(A.is_symmetric()));
     REQUIRE(is_false(B.is_symmetric()));
@@ -2182,7 +2193,8 @@ TEST_CASE("is_hermitian(): DenseMatrix", "[matrices]")
     auto c1 = complex_double(std::complex<double>(2, 1));
     auto c2 = complex_double(std::complex<double>(2, -1));
     auto c3 = complex_double(std::complex<double>(2, -2));
-    DenseMatrix A = DenseMatrix(2, 2, {integer(0), integer(0), integer(0), integer(0)});
+    DenseMatrix A
+        = DenseMatrix(2, 2, {integer(0), integer(0), integer(0), integer(0)});
     DenseMatrix B = DenseMatrix(2, 2, {integer(2), c1, c2, integer(3)});
     DenseMatrix C = DenseMatrix(2, 2, {symbol("z"), c1, c2, integer(3)});
     DenseMatrix D = DenseMatrix(3, 4);

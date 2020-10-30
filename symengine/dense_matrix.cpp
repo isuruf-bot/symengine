@@ -181,7 +181,8 @@ tribool DenseMatrix::is_hermitian() const
             auto &e = m_[i * ncols + j];
             if (j != i) {
                 auto &e2 = m_[j * ncols + i];
-                cur = and_tribool(cur, SymEngine::is_zero(*sub(e, SymEngine::conjugate(e2))));
+                cur = and_tribool(
+                    cur, SymEngine::is_zero(*sub(e, SymEngine::conjugate(e2))));
             } else {
                 cur = and_tribool(cur, SymEngine::is_real(*e));
             }
