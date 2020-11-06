@@ -72,7 +72,7 @@ public:
     {
         is_positive_ = tribool::trifalse;
     };
-    
+
     tribool apply(const Basic &b);
 };
 
@@ -107,7 +107,7 @@ public:
     {
         is_nonpositive_ = tribool::trifalse;
     };
-    
+
     tribool apply(const Basic &b);
 };
 

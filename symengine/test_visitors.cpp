@@ -93,7 +93,7 @@ tribool is_negative(const Basic &b)
 }
 
 void NonNegativeVisitor::bvisit(const Number &x)
-{   
+{
     if (is_a_Complex(x)) {
         is_nonnegative_ = tribool::trifalse;
     } else if (bool(x.is_negative())) {
