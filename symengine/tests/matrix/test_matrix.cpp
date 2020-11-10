@@ -2229,7 +2229,9 @@ TEST_CASE("is_weakly_diagonally_dominant(): DenseMatrix", "[matrices]")
     DenseMatrix H
         = DenseMatrix(2, 2, {integer(2), symbol("z"), c1, integer(3)});
     DenseMatrix K = DenseMatrix(1, 1, {integer(0)});
-    DenseMatrix L = DenseMatrix(3, 3, {integer(2), integer(-1), integer(1), integer(2), integer(4), rational(1, 2), integer(7), integer(-3), integer(5)});
+    DenseMatrix L = DenseMatrix(3, 3, {integer(2), integer(-1), integer(1),
+                                       integer(2), integer(4), rational(1, 2),
+                                       integer(7), integer(-3), integer(5)});
 
     REQUIRE(is_true(A.is_weakly_diagonally_dominant()));
     REQUIRE(is_false(B.is_weakly_diagonally_dominant()));
@@ -2259,7 +2261,9 @@ TEST_CASE("is_strictly_diagonally_dominant(): DenseMatrix", "[matrices]")
     DenseMatrix H
         = DenseMatrix(2, 2, {integer(2), symbol("z"), c1, integer(3)});
     DenseMatrix K = DenseMatrix(1, 1, {integer(0)});
-    DenseMatrix L = DenseMatrix(3, 3, {integer(2), integer(-1), integer(1), integer(2), integer(4), rational(1, 2), integer(7), integer(-3), integer(5)});
+    DenseMatrix L = DenseMatrix(3, 3, {integer(2), integer(-1), integer(1),
+                                       integer(2), integer(4), rational(1, 2),
+                                       integer(7), integer(-3), integer(5)});
 
     REQUIRE(is_false(A.is_strictly_diagonally_dominant()));
     REQUIRE(is_false(B.is_strictly_diagonally_dominant()));

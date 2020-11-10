@@ -252,7 +252,6 @@ tribool DenseMatrix::is_strictly_diagonally_dominant() const
     return diagdom;
 }
 
-
 RCP<const Basic> DenseMatrix::det() const
 {
     return det_bareis(*this);
