@@ -2280,17 +2280,40 @@ TEST_CASE("is_strictly_diagonally_dominant(): DenseMatrix", "[matrices]")
 
 TEST_CASE("is_positive_definite(): DenseMatrix", "[matrices]")
 {
-    DenseMatrix A = DenseMatrix(3, 3, {integer(2), integer(-1), integer(0), integer(-1), integer(2), integer(-1), integer(0), integer(-1), integer(2)});
-    DenseMatrix B = DenseMatrix(2, 2, {integer(5), integer(4), integer(4), integer(5)});
-    DenseMatrix C = DenseMatrix(3, 3, {integer(2), integer(-1), integer(-1), integer(-1), integer(2), integer(-1), integer(-1), integer(-1), integer(2)});
-    DenseMatrix D = DenseMatrix(2, 2, {integer(1), integer(2), integer(2), integer(4)});
-    DenseMatrix E = DenseMatrix(2, 2, {integer(2), integer(3), integer(4), integer(8)});
-    DenseMatrix F = DenseMatrix(2, 2, {integer(1), Complex::from_two_nums(*integer(0), *integer(2)), Complex::from_two_nums(*integer(0), *integer(-1)), integer(4)});
-    DenseMatrix G = DenseMatrix(2, 2, {symbol("a"), symbol("b"), symbol("c"), symbol("d")});
-    DenseMatrix H = DenseMatrix(4, 4, {real_double(0.0228202735623867), real_double(0.00518748979085398), real_double(-0.0743036351048907), real_double(-0.00709135324903921), real_double(0.00518748979085398), real_double(0.0349045359786350), real_double(0.0830317991056637), real_double(0.00233147902806909), real_double(-0.0743036351048907), real_double(0.0830317991056637), real_double(1.15859676366277), real_double(0.340359081555988), real_double(-0.00709135324903921), real_double(0.00233147902806909), real_double(0.340359081555988), real_double(0.928147644848199)});
-    DenseMatrix L = DenseMatrix(3, 3, {integer(0), integer(0), integer(0), integer(0), integer(1), integer(2), integer(0), integer(2), integer(1)});
-    DenseMatrix M = DenseMatrix(2, 2, {integer(-1), integer(0), integer(0), integer(23)});
-    DenseMatrix N = DenseMatrix(2, 2, {integer(2), integer(0), integer(-1), integer(2)});
+    DenseMatrix A = DenseMatrix(3, 3, {integer(2), integer(-1), integer(0),
+                                       integer(-1), integer(2), integer(-1),
+                                       integer(0), integer(-1), integer(2)});
+    DenseMatrix B
+        = DenseMatrix(2, 2, {integer(5), integer(4), integer(4), integer(5)});
+    DenseMatrix C = DenseMatrix(3, 3, {integer(2), integer(-1), integer(-1),
+                                       integer(-1), integer(2), integer(-1),
+                                       integer(-1), integer(-1), integer(2)});
+    DenseMatrix D
+        = DenseMatrix(2, 2, {integer(1), integer(2), integer(2), integer(4)});
+    DenseMatrix E
+        = DenseMatrix(2, 2, {integer(2), integer(3), integer(4), integer(8)});
+    DenseMatrix F = DenseMatrix(
+        2, 2, {integer(1), Complex::from_two_nums(*integer(0), *integer(2)),
+               Complex::from_two_nums(*integer(0), *integer(-1)), integer(4)});
+    DenseMatrix G = DenseMatrix(
+        2, 2, {symbol("a"), symbol("b"), symbol("c"), symbol("d")});
+    DenseMatrix H = DenseMatrix(
+        4, 4,
+        {real_double(0.0228202735623867), real_double(0.00518748979085398),
+         real_double(-0.0743036351048907), real_double(-0.00709135324903921),
+         real_double(0.00518748979085398), real_double(0.0349045359786350),
+         real_double(0.0830317991056637), real_double(0.00233147902806909),
+         real_double(-0.0743036351048907), real_double(0.0830317991056637),
+         real_double(1.15859676366277), real_double(0.340359081555988),
+         real_double(-0.00709135324903921), real_double(0.00233147902806909),
+         real_double(0.340359081555988), real_double(0.928147644848199)});
+    DenseMatrix L = DenseMatrix(3, 3, {integer(0), integer(0), integer(0),
+                                       integer(0), integer(1), integer(2),
+                                       integer(0), integer(2), integer(1)});
+    DenseMatrix M
+        = DenseMatrix(2, 2, {integer(-1), integer(0), integer(0), integer(23)});
+    DenseMatrix N
+        = DenseMatrix(2, 2, {integer(2), integer(0), integer(-1), integer(2)});
     DenseMatrix P = DenseMatrix(2, 1, {integer(2), integer(0)});
 
     REQUIRE(is_true(A.is_positive_definite()));

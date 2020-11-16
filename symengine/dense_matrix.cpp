@@ -257,12 +257,14 @@ tribool DenseMatrix::shortcut_to_posdef() const
     tribool is_diagonal_positive = tribool::tritrue;
     unsigned offset = 0;
     for (unsigned i = 1; i < row_; i++) {
-        is_diagonal_positive = and_tribool(is_diagonal_positive, is_positive(*m_[offset]));
+        is_diagonal_positive
+            = and_tribool(is_diagonal_positive, is_positive(*m_[offset]));
         if (is_false(is_diagonal_positive))
             return is_diagonal_positive;
         offset += row_ + 1;
     }
-    if (is_true(and_tribool(is_diagonal_positive, this->is_strictly_diagonally_dominant())))
+    if (is_true(and_tribool(is_diagonal_positive,
+                            this->is_strictly_diagonally_dominant())))
         return tribool::tritrue;
     return tribool::indeterminate;
 }
@@ -276,7 +278,8 @@ tribool DenseMatrix::is_positive_definite_GE()
             return ispos;
         for (unsigned j = i + 1; j < size; j++) {
             for (unsigned k = i + 1; k < size; k++) {
-                m_[j * size + k] = sub(mul(m_[i * size + i], m_[j * size + k]), mul(m_[j * size + i], m_[i * size + k]));
+                m_[j * size + k] = sub(mul(m_[i * size + i], m_[j * size + k]),
+                                       mul(m_[j * size + i], m_[i * size + k]));
             }
         }
     }
@@ -285,7 +288,7 @@ tribool DenseMatrix::is_positive_definite_GE()
 
 tribool DenseMatrix::is_positive_definite() const
 {
-        
+
     auto A = *this;
     std::unique_ptr<DenseMatrix> B;
     const DenseMatrix *H;
