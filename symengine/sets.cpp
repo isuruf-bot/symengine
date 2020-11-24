@@ -702,7 +702,8 @@ RCP<const Set> FiniteSet::set_union(const RCP<const Set> &o) const
         if (container.empty()) {
             return rationals();
         } else {
-            return SymEngine::make_set_union({rationals(), finiteset(container)});
+            return SymEngine::make_set_union(
+                {rationals(), finiteset(container)});
         }
     }
     if (is_a<Integers>(*o)) {
@@ -753,7 +754,8 @@ RCP<const Set> FiniteSet::set_intersection(const RCP<const Set> &o) const
         for (const auto &elem : container_) {
             if (is_a_Number(*elem)) {
                 if (!down_cast<const Number &>(*elem).is_complex()) {
-                    if (!is_a<Rationals>(*o) or down_cast<const Number &>(*elem).is_exact()) {
+                    if (!is_a<Rationals>(*o)
+                        or down_cast<const Number &>(*elem).is_exact()) {
                         kept.insert(elem);
                     }
                 }
@@ -765,16 +767,14 @@ RCP<const Set> FiniteSet::set_intersection(const RCP<const Set> &o) const
             if (others.empty()) {
                 return emptyset();
             } else {
-                return SymEngine::set_intersection(
-                    {o, finiteset(others)});
+                return SymEngine::set_intersection({o, finiteset(others)});
             }
         } else {
             if (others.empty()) {
                 return finiteset(kept);
             } else {
                 others.insert(kept.begin(), kept.end());
-                return SymEngine::set_intersection(
-                    {o, finiteset(others)});
+                return SymEngine::set_intersection({o, finiteset(others)});
             }
         }
     }
