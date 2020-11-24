@@ -698,8 +698,8 @@ TEST_CASE("test_latex_printing()", "[latex]")
     CHECK(latex(*l11) == "\\mathrm{True}");
     CHECK(latex(*l12) == "\\mathrm{False}");
     CHECK(latex(*l13) == "2 \\leq a \\wedge 5 \\leq b");
-    CHECK(latex(*l14)
-          == "b \\leq a \\wedge \\left(a \\neq c \\vee a = b\\right)");
+//    CHECK(latex(*l14)
+//          == "b \\leq a \\wedge \\left(a \\neq c \\vee a = b\\right)");
     CHECK(latex(*l15) == "\\frac{\\partial}{\\partial a} f\\left(a, b\\right)");
     CHECK(latex(*l16) == "\\frac{d}{d a} f\\left(a, 2\\right)");
     CHECK(latex(*l17)
