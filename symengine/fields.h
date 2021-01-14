@@ -37,8 +37,12 @@ public:
                 return a.first.degree() < b.first.degree();
         }
     };
-    GaloisFieldDict() SYMENGINE_NOEXCEPT {}
-    ~GaloisFieldDict() SYMENGINE_NOEXCEPT {}
+    GaloisFieldDict() SYMENGINE_NOEXCEPT
+    {
+    }
+    ~GaloisFieldDict() SYMENGINE_NOEXCEPT
+    {
+    }
     GaloisFieldDict(GaloisFieldDict &&other) SYMENGINE_NOEXCEPT
         : dict_(std::move(other.dict_)),
           modulo_(std::move(other.modulo_))

@@ -348,7 +348,9 @@ TEST_CASE("Test NumberWrapper", "[number]")
     {
     public:
         long i_;
-        Long(long i) : i_(i) {}
+        Long(long i) : i_(i)
+        {
+        }
 
         virtual std::string __str__() const
         {

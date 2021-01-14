@@ -270,7 +270,9 @@ void CountOpsVisitor::bvisit(const Pow &x)
     apply(*x.get_base());
 }
 
-void CountOpsVisitor::bvisit(const Number &x) {}
+void CountOpsVisitor::bvisit(const Number &x)
+{
+}
 
 void CountOpsVisitor::bvisit(const ComplexBase &x)
 {
@@ -283,9 +285,13 @@ void CountOpsVisitor::bvisit(const ComplexBase &x)
     }
 }
 
-void CountOpsVisitor::bvisit(const Symbol &x) {}
+void CountOpsVisitor::bvisit(const Symbol &x)
+{
+}
 
-void CountOpsVisitor::bvisit(const Constant &x) {}
+void CountOpsVisitor::bvisit(const Constant &x)
+{
+}
 
 void CountOpsVisitor::bvisit(const Basic &x)
 {

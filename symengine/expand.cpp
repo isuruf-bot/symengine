@@ -28,7 +28,9 @@ private:
     bool deep;
 
 public:
-    ExpandVisitor(bool deep_ = true) : deep(deep_) {}
+    ExpandVisitor(bool deep_ = true) : deep(deep_)
+    {
+    }
     RCP<const Basic> apply(const Basic &b)
     {
         b.accept(*this);

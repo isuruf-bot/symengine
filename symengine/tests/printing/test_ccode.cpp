@@ -172,9 +172,8 @@ TEST_CASE("Piecewise", "[ccode]")
                         {y, contains(x, int2)},
                         {add(x, y), boolTrue}});
 
-    REQUIRE(ccode(*p)
-            == "((x <= 2) ? (\n   x\n)\n: ((x > 2 && x <= 5) ? (\n   "
-               "y\n)\n: (\n   x + y\n)))");
+    REQUIRE(ccode(*p) == "((x <= 2) ? (\n   x\n)\n: ((x > 2 && x <= 5) ? (\n   "
+                         "y\n)\n: (\n   x + y\n)))");
 }
 
 TEST_CASE("JavaScript math functions", "[jscode]")

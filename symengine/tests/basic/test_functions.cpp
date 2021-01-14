@@ -3709,7 +3709,9 @@ TEST_CASE("Abs: functions", "[functions]")
 class MySin : public FunctionWrapper
 {
 public:
-    MySin(RCP<const Basic> arg) : FunctionWrapper("MySin", arg) {}
+    MySin(RCP<const Basic> arg) : FunctionWrapper("MySin", arg)
+    {
+    }
     RCP<const Number> eval(long bits) const
     {
         return real_double(::sin(eval_double(*get_vec()[0])));

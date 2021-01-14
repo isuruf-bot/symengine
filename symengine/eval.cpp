@@ -57,7 +57,9 @@ protected:
     unsigned long bits;
 
 public:
-    EvalVisitor(unsigned long bits) : bits(bits) {}
+    EvalVisitor(unsigned long bits) : bits(bits)
+    {
+    }
     using TransformVisitor::apply;
     using TransformVisitor::bvisit;
     void bvisit(const Number &x)

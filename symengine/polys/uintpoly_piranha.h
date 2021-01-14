@@ -119,7 +119,9 @@ private:
     ptr_type ptr_;
 
 public:
-    PiranhaForIter(ptr_type ptr) : ptr_{ptr} {}
+    PiranhaForIter(ptr_type ptr) : ptr_{ptr}
+    {
+    }
 
     bool operator==(const PiranhaForIter &rhs)
     {

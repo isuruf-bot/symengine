@@ -103,9 +103,8 @@ public:
      * */
     RCP<const Number> addreal(const Complex &other) const
     {
-        return number(i
-                      + std::complex<double>(mp_get_d(other.real_),
-                                             mp_get_d(other.imaginary_)));
+        return number(i + std::complex<double>(mp_get_d(other.real_),
+                                               mp_get_d(other.imaginary_)));
     }
 
     /*! Add RealDoubles
@@ -155,9 +154,8 @@ public:
      * */
     RCP<const Number> subreal(const Complex &other) const
     {
-        return number(i
-                      - std::complex<double>(mp_get_d(other.real_),
-                                             mp_get_d(other.imaginary_)));
+        return number(i - std::complex<double>(mp_get_d(other.real_),
+                                               mp_get_d(other.imaginary_)));
     }
 
     /*! Subtract RealDoubles
@@ -207,9 +205,8 @@ public:
      * */
     RCP<const Number> rsubreal(const Complex &other) const
     {
-        return number(-i
-                      + std::complex<double>(mp_get_d(other.real_),
-                                             mp_get_d(other.imaginary_)));
+        return number(-i + std::complex<double>(mp_get_d(other.real_),
+                                                mp_get_d(other.imaginary_)));
     }
 
     //! Converts the param `other` appropriately and then calls `subreal`
@@ -249,9 +246,8 @@ public:
      * */
     RCP<const Number> mulreal(const Complex &other) const
     {
-        return number(i
-                      * std::complex<double>(mp_get_d(other.real_),
-                                             mp_get_d(other.imaginary_)));
+        return number(i * std::complex<double>(mp_get_d(other.real_),
+                                               mp_get_d(other.imaginary_)));
     }
 
     /*! Multiply RealDoubles
@@ -301,9 +297,8 @@ public:
      * */
     RCP<const Number> divreal(const Complex &other) const
     {
-        return number(i
-                      / std::complex<double>(mp_get_d(other.real_),
-                                             mp_get_d(other.imaginary_)));
+        return number(i / std::complex<double>(mp_get_d(other.real_),
+                                               mp_get_d(other.imaginary_)));
     }
 
     /*! Divide RealDoubles

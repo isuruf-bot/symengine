@@ -108,8 +108,12 @@ public:
     typedef Key key_type;
 
 public:
-    ODictWrapper() SYMENGINE_NOEXCEPT {}
-    ~ODictWrapper() SYMENGINE_NOEXCEPT {}
+    ODictWrapper() SYMENGINE_NOEXCEPT
+    {
+    }
+    ~ODictWrapper() SYMENGINE_NOEXCEPT
+    {
+    }
 
     ODictWrapper(const int &i)
     {
@@ -588,7 +592,9 @@ protected:
     long i_;
 
 public:
-    ContainerBaseIter(RCP<const T> ptr, long x) : ptr_{ptr}, i_{x} {}
+    ContainerBaseIter(RCP<const T> ptr, long x) : ptr_{ptr}, i_{x}
+    {
+    }
 
     bool operator==(const ContainerBaseIter &rhs)
     {

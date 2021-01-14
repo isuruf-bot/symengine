@@ -27,9 +27,13 @@ public:
         vec_size = s;
     }
 
-    UDictWrapper() SYMENGINE_NOEXCEPT {}
+    UDictWrapper() SYMENGINE_NOEXCEPT
+    {
+    }
 
-    ~UDictWrapper() SYMENGINE_NOEXCEPT {}
+    ~UDictWrapper() SYMENGINE_NOEXCEPT
+    {
+    }
 
     UDictWrapper(Dict &&p, unsigned int sz)
     {
@@ -260,11 +264,17 @@ public:
 class MIntDict : public UDictWrapper<vec_uint, integer_class, MIntDict>
 {
 public:
-    MIntDict(unsigned int s) SYMENGINE_NOEXCEPT : UDictWrapper(s) {}
+    MIntDict(unsigned int s) SYMENGINE_NOEXCEPT : UDictWrapper(s)
+    {
+    }
 
-    MIntDict() SYMENGINE_NOEXCEPT {}
+    MIntDict() SYMENGINE_NOEXCEPT
+    {
+    }
 
-    ~MIntDict() SYMENGINE_NOEXCEPT {}
+    ~MIntDict() SYMENGINE_NOEXCEPT
+    {
+    }
 
     MIntDict(MIntDict &&other) SYMENGINE_NOEXCEPT
         : UDictWrapper(std::move(other))
@@ -276,7 +286,9 @@ public:
     {
     }
 
-    MIntDict(const umap_uvec_mpz &p, unsigned int sz) : UDictWrapper(p, sz) {}
+    MIntDict(const umap_uvec_mpz &p, unsigned int sz) : UDictWrapper(p, sz)
+    {
+    }
 
     MIntDict(const MIntDict &) = default;
 
@@ -286,11 +298,17 @@ public:
 class MExprDict : public UDictWrapper<vec_int, Expression, MExprDict>
 {
 public:
-    MExprDict(unsigned int s) SYMENGINE_NOEXCEPT : UDictWrapper(s) {}
+    MExprDict(unsigned int s) SYMENGINE_NOEXCEPT : UDictWrapper(s)
+    {
+    }
 
-    MExprDict() SYMENGINE_NOEXCEPT {}
+    MExprDict() SYMENGINE_NOEXCEPT
+    {
+    }
 
-    ~MExprDict() SYMENGINE_NOEXCEPT {}
+    ~MExprDict() SYMENGINE_NOEXCEPT
+    {
+    }
 
     MExprDict(MExprDict &&other) SYMENGINE_NOEXCEPT
         : UDictWrapper(std::move(other))
@@ -302,7 +320,9 @@ public:
     {
     }
 
-    MExprDict(const umap_vec_expr &p, unsigned int sz) : UDictWrapper(p, sz) {}
+    MExprDict(const umap_vec_expr &p, unsigned int sz) : UDictWrapper(p, sz)
+    {
+    }
 
     MExprDict(const MExprDict &) = default;
 
@@ -440,11 +460,14 @@ class MIntPoly : public MSymEnginePoly<MIntDict, MIntPoly>
 {
 public:
     MIntPoly(const set_basic &vars, MIntDict &&dict)
-        : MSymEnginePoly(vars, std::move(dict)){SYMENGINE_ASSIGN_TYPEID()}
+        : MSymEnginePoly(vars, std::move(dict))
+    {
+        SYMENGINE_ASSIGN_TYPEID()
+    }
 
-          IMPLEMENT_TYPEID(SYMENGINE_MINTPOLY)
+    IMPLEMENT_TYPEID(SYMENGINE_MINTPOLY)
 
-              hash_t __hash__() const;
+    hash_t __hash__() const;
     RCP<const Basic> as_symbolic() const;
 
     integer_class eval(
@@ -455,11 +478,14 @@ class MExprPoly : public MSymEnginePoly<MExprDict, MExprPoly>
 {
 public:
     MExprPoly(const set_basic &vars, MExprDict &&dict)
-        : MSymEnginePoly(vars, std::move(dict)){SYMENGINE_ASSIGN_TYPEID()}
+        : MSymEnginePoly(vars, std::move(dict))
+    {
+        SYMENGINE_ASSIGN_TYPEID()
+    }
 
-          IMPLEMENT_TYPEID(SYMENGINE_MEXPRPOLY)
+    IMPLEMENT_TYPEID(SYMENGINE_MEXPRPOLY)
 
-              hash_t __hash__() const;
+    hash_t __hash__() const;
     RCP<const Basic> as_symbolic() const;
     Expression
     eval(std::map<RCP<const Basic>, Expression, RCPBasicKeyLess> &vals) const;

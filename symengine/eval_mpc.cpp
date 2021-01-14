@@ -14,7 +14,9 @@ protected:
     mpc_ptr result_;
 
 public:
-    EvalMPCVisitor(mpfr_rnd_t rnd) : rnd_{rnd} {}
+    EvalMPCVisitor(mpfr_rnd_t rnd) : rnd_{rnd}
+    {
+    }
 
     void apply(mpc_ptr result, const Basic &b)
     {

@@ -9,7 +9,9 @@ class RewriteAsExp : public BaseVisitor<RewriteAsExp, TransformVisitor>
 public:
     using TransformVisitor::bvisit;
 
-    RewriteAsExp() : BaseVisitor<RewriteAsExp, TransformVisitor>() {}
+    RewriteAsExp() : BaseVisitor<RewriteAsExp, TransformVisitor>()
+    {
+    }
 
     void bvisit(const Sin &x)
     {

@@ -594,14 +594,12 @@ TEST_CASE("test_mathml()", "[mathml]")
     REQUIRE(mathml(*x)
             == "<apply><power/><ci>x</ci><cn type=\"integer\">2</cn></apply>");
     RCP<const Basic> y = parse("3/2 * y");
-    REQUIRE(mathml(*y)
-            == "<apply><times/><cn "
-               "type=\"rational\">3<sep/>2</cn><ci>y</ci></apply>");
+    REQUIRE(mathml(*y) == "<apply><times/><cn "
+                          "type=\"rational\">3<sep/>2</cn><ci>y</ci></apply>");
     RCP<const Basic> z = parse("x^(y^(5/3))");
-    REQUIRE(mathml(*z)
-            == "<apply><power/><ci>x</ci><apply><power/><ci>y</"
-               "ci><cn "
-               "type=\"rational\">5<sep/>3</cn></apply></apply>");
+    REQUIRE(mathml(*z) == "<apply><power/><ci>x</ci><apply><power/><ci>y</"
+                          "ci><cn "
+                          "type=\"rational\">5<sep/>3</cn></apply></apply>");
     RCP<const Basic> w = parse("1 + 4 * x * y");
     REQUIRE(mathml(*w)
             == "<apply><plus/><cn type=\"integer\">1</cn><apply><times/><cn "
@@ -653,9 +651,8 @@ TEST_CASE("test_julia(): printing", "[printing]")
     CHECK(r == "2.0 + 3.0*im");
 #ifdef HAVE_SYMENGINE_MPC
     r = julia_str(*parse("2.00000000000000000000000000000000 + 3*I"));
-    CHECK(r
-          == "2.00000000000000000000000000000000 + "
-             "3.00000000000000000000000000000000*im");
+    CHECK(r == "2.00000000000000000000000000000000 + "
+               "3.00000000000000000000000000000000*im");
 #endif
 }
 
@@ -711,17 +708,14 @@ TEST_CASE("test_latex_printing()", "[latex]")
     CHECK(latex(*l16) == "\\frac{d}{d a} f\\left(a, 2\\right)");
     CHECK(latex(*l17)
           == "\\frac{\\partial^3}{\\partial a^3 } f\\left(a, 2\\right)");
-    CHECK(latex(*l18)
-          == "\\frac{\\partial^3}{\\partial a^2 \\partial b } "
-             "f\\left(a, b\\right)");
-    CHECK(latex(*l19)
-          == "\\pi^2 + 2 e + \\sin{\\left(\\sqrt[10]{2}\\right)} + "
-             "\\operatorname{asin}{\\left(\\sqrt{2}\\right)}");
-    CHECK(latex(*l20)
-          == "4 \\left. \\frac{\\partial^2}{\\partial \\xi_1 "
-             "\\partial \\xi_2 } f\\left(\\xi_1, "
-             "\\xi_2\\right)\\right|_{\\substack{\\xi_1=2 a \\\\ "
-             "\\xi_2=2 b}}");
+    CHECK(latex(*l18) == "\\frac{\\partial^3}{\\partial a^2 \\partial b } "
+                         "f\\left(a, b\\right)");
+    CHECK(latex(*l19) == "\\pi^2 + 2 e + \\sin{\\left(\\sqrt[10]{2}\\right)} + "
+                         "\\operatorname{asin}{\\left(\\sqrt{2}\\right)}");
+    CHECK(latex(*l20) == "4 \\left. \\frac{\\partial^2}{\\partial \\xi_1 "
+                         "\\partial \\xi_2 } f\\left(\\xi_1, "
+                         "\\xi_2\\right)\\right|_{\\substack{\\xi_1=2 a \\\\ "
+                         "\\xi_2=2 b}}");
     CHECK(latex(*l21) == "\\xi_1 + \\alpha + xi2");
     CHECK(latex(*l22) == "2 + 3 x^{10}");
     CHECK(latex(*l23) == "e^{x - y}");

@@ -11,7 +11,9 @@
 namespace SymEngine
 {
 // ----------------------------- CSRMatrix ------------------------------------
-CSRMatrix::CSRMatrix() {}
+CSRMatrix::CSRMatrix()
+{
+}
 
 CSRMatrix::CSRMatrix(unsigned row, unsigned col) : row_(row), col_(col)
 {

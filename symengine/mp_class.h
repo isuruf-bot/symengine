@@ -50,9 +50,10 @@ namespace SymEngine
 typedef boost::multiprecision::number<boost::multiprecision::cpp_int_backend<>,
                                       boost::multiprecision::et_off>
     integer_class;
-typedef boost::multiprecision::number<
-    boost::multiprecision::cpp_rational_backend, boost::multiprecision::et_off>
-    rational_class;
+typedef boost::multiprecision::
+    number<boost::multiprecision::cpp_rational_backend,
+           boost::multiprecision::et_off>
+        rational_class;
 #elif SYMENGINE_INTEGER_CLASS == SYMENGINE_PIRANHA
 typedef piranha::integer integer_class;
 typedef piranha::rational rational_class;
@@ -115,7 +116,9 @@ inline void mp_set_d(integer_class &i, double a)
     mpz_set_d(i.get_mpz_t(), a);
 }
 
-inline void mp_demote(integer_class &i) {}
+inline void mp_demote(integer_class &i)
+{
+}
 
 inline bool mp_fits_ulong_p(const integer_class &i)
 {
@@ -305,7 +308,9 @@ inline piranha::integer mp_sqrt(const piranha::integer &i)
     return i.sqrt();
 }
 
-inline void mp_demote(piranha::integer &i) {}
+inline void mp_demote(piranha::integer &i)
+{
+}
 
 inline mpz_ptr get_mpz_t(piranha::integer &i)
 {

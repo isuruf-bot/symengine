@@ -150,11 +150,14 @@ tribool is_real(const Basic &b);
 class NumberWrapper : public Number
 {
 public:
-    NumberWrapper(){SYMENGINE_ASSIGN_TYPEID()}
+    NumberWrapper()
+    {
+        SYMENGINE_ASSIGN_TYPEID()
+    }
 
     IMPLEMENT_TYPEID(SYMENGINE_NUMBER_WRAPPER)
 
-        virtual std::string __str__() const
+    virtual std::string __str__() const
     {
         throw NotImplementedError("Not Implemented.");
     };

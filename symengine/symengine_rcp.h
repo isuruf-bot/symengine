@@ -41,7 +41,9 @@ public:
     {
         SYMENGINE_ASSERT(ptr_ != nullptr)
     }
-    inline Ptr(const Ptr<T> &ptr) : ptr_(ptr.ptr_) {}
+    inline Ptr(const Ptr<T> &ptr) : ptr_(ptr.ptr_)
+    {
+    }
     template <class T2>
     inline Ptr(const Ptr<T2> &ptr) : ptr_(ptr.get())
     {
@@ -106,7 +108,9 @@ template <class T>
 class RCP
 {
 public:
-    RCP(ENull null_arg = null) : ptr_(nullptr) {}
+    RCP(ENull null_arg = null) : ptr_(nullptr)
+    {
+    }
     explicit RCP(T *p) : ptr_(p)
     {
         SYMENGINE_ASSERT(ptr_ != nullptr)
@@ -337,7 +341,9 @@ private:
     mutable unsigned int refcount_; // reference counter
 #endif // WITH_SYMENGINE_THREAD_SAFE
 public:
-    EnableRCPFromThis() : refcount_(0) {}
+    EnableRCPFromThis() : refcount_(0)
+    {
+    }
 
 private:
 #else

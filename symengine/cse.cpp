@@ -315,7 +315,9 @@ public:
     set_basic adds;
     set_basic muls;
     set_basic seen_subexp;
-    OptsCSEVisitor(umap_basic_basic &opt_subs_) : opt_subs(opt_subs_) {}
+    OptsCSEVisitor(umap_basic_basic &opt_subs_) : opt_subs(opt_subs_)
+    {
+    }
     bool is_seen(const Basic &expr)
     {
         return (seen_subexp.find(expr.rcp_from_this()) != seen_subexp.end());

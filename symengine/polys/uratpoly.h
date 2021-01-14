@@ -14,15 +14,25 @@ class URatDict : public ODictWrapper<unsigned int, rational_class, URatDict>
 {
 
 public:
-    URatDict() SYMENGINE_NOEXCEPT {}
-    ~URatDict() SYMENGINE_NOEXCEPT {}
+    URatDict() SYMENGINE_NOEXCEPT
+    {
+    }
+    ~URatDict() SYMENGINE_NOEXCEPT
+    {
+    }
     URatDict(URatDict &&other) SYMENGINE_NOEXCEPT
         : ODictWrapper(std::move(other))
     {
     }
-    URatDict(const int &i) : ODictWrapper(i) {}
-    URatDict(const map_uint_mpq &p) : ODictWrapper(p) {}
-    URatDict(const rational_class &i) : ODictWrapper(i) {}
+    URatDict(const int &i) : ODictWrapper(i)
+    {
+    }
+    URatDict(const map_uint_mpq &p) : ODictWrapper(p)
+    {
+    }
+    URatDict(const rational_class &i) : ODictWrapper(i)
+    {
+    }
 
     URatDict(const URatDict &) = default;
     URatDict &operator=(const URatDict &) = default;

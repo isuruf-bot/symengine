@@ -7,10 +7,12 @@
 namespace SymEngine
 {
 
-Constant::Constant(const std::string &name)
-    : name_{name} {SYMENGINE_ASSIGN_TYPEID()}
+Constant::Constant(const std::string &name) : name_{name}
+{
+    SYMENGINE_ASSIGN_TYPEID()
+}
 
-      hash_t Constant::__hash__() const
+hash_t Constant::__hash__() const
 {
     hash_t seed = SYMENGINE_CONSTANT;
     hash_combine<std::string>(seed, name_);

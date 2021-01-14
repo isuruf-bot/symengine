@@ -874,11 +874,13 @@ RCP<const Set> FiniteSet::create(const set_basic &container) const
     return finiteset(container);
 }
 
-Union::Union(const set_set &in)
-    : container_(in){SYMENGINE_ASSIGN_TYPEID()
-                         SYMENGINE_ASSERT(Union::is_canonical(in))}
+Union::Union(const set_set &in) : container_(in)
+{
+    SYMENGINE_ASSIGN_TYPEID()
+    SYMENGINE_ASSERT(Union::is_canonical(in))
+}
 
-      hash_t Union::__hash__() const
+hash_t Union::__hash__() const
 {
     hash_t seed = SYMENGINE_UNION;
     for (const auto &a : container_)
@@ -979,9 +981,12 @@ vec_basic Union::get_args() const
 
 Complement::Complement(const RCP<const Set> &universe,
                        const RCP<const Set> &container)
-    : universe_(universe), container_(container){SYMENGINE_ASSIGN_TYPEID()}
+    : universe_(universe), container_(container)
+{
+    SYMENGINE_ASSIGN_TYPEID()
+}
 
-      hash_t Complement::__hash__() const
+hash_t Complement::__hash__() const
 {
     hash_t seed = SYMENGINE_COMPLEMENT;
     hash_combine<Basic>(seed, *universe_);
@@ -1395,7 +1400,7 @@ RCP<const Set> conditionset(const RCP<const Basic> &sym,
             if (is_a<Contains>(**it)
                 and eq(*down_cast<const Contains &>(**it).get_expr(), *sym)
                 and is_a<FiniteSet>(
-                    *down_cast<const Contains &>(**it).get_set())) {
+                        *down_cast<const Contains &>(**it).get_set())) {
                 auto fset = down_cast<const Contains &>(**it).get_set();
                 auto fcont
                     = down_cast<const FiniteSet &>(*fset).get_container();

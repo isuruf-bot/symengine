@@ -341,7 +341,9 @@ public:
         stop_ = true;
     }
 
-    void bvisit(const Basic &x) {}
+    void bvisit(const Basic &x)
+    {
+    }
 
     bool apply(const Basic &b, const RCP<const Symbol> &x)
     {

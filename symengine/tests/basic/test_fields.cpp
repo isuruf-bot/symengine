@@ -567,9 +567,8 @@ TEST_CASE("GaloisFieldDict pow_mod : Basic", "[basic]")
     auto b = d2.gf_frobenius_monomial_base();
     GaloisFieldDict h = d1.gf_frobenius_map(d2, b);
     GaloisFieldDict h1 = d2.gf_pow_mod(d1, 3);
-    REQUIRE(h1
-            == GaloisFieldDict::from_vec(
-                {1_z, 1_z, 1_z, 2_z, 0_z, 0_z, 2_z, 2_z}, 3_z));
+    REQUIRE(h1 == GaloisFieldDict::from_vec(
+                      {1_z, 1_z, 1_z, 2_z, 0_z, 0_z, 2_z, 2_z}, 3_z));
     REQUIRE(h == h1);
     REQUIRE(h == (d1.gf_pow(3) % d2));
 }
@@ -581,13 +580,13 @@ TEST_CASE("GaloisFieldDict distinct degree factorization : Basic", "[basic]")
     d1 = GaloisFieldDict({{15, 1_z}, {0, -1_z}}, 11_z);
     auto b = d1.gf_ddf_zassenhaus();
     REQUIRE(b.size() == 2);
-    REQUIRE(
-        b[0].first
-        == GaloisFieldDict::from_vec({10_z, 0_z, 0_z, 0_z, 0_z, 1_z}, 11_z));
+    REQUIRE(b[0].first == GaloisFieldDict::from_vec(
+                              {10_z, 0_z, 0_z, 0_z, 0_z, 1_z}, 11_z));
     REQUIRE(b[0].second == 1_z);
-    REQUIRE(b[1].first
-            == GaloisFieldDict::from_vec(
-                {1_z, 0_z, 0_z, 0_z, 0_z, 1_z, 0_z, 0_z, 0_z, 0_z, 1_z}, 11_z));
+    REQUIRE(
+        b[1].first
+        == GaloisFieldDict::from_vec(
+               {1_z, 0_z, 0_z, 0_z, 0_z, 1_z, 0_z, 0_z, 0_z, 0_z, 1_z}, 11_z));
     REQUIRE(b[1].second == 2_z);
     auto c = d1.gf_ddf_shoup();
     REQUIRE(b == c);
@@ -599,18 +598,17 @@ TEST_CASE("GaloisFieldDict distinct degree factorization : Basic", "[basic]")
     REQUIRE(b[0].second == 1_z);
     REQUIRE(b[1].first == GaloisFieldDict::from_vec({1_z, 1_z, 1_z}, 2_z));
     REQUIRE(b[1].second == 2_z);
-    REQUIRE(
-        b[2].first
-        == GaloisFieldDict::from_vec({1_z, 1_z, 1_z, 1_z, 1_z, 1_z, 1_z}, 2_z));
+    REQUIRE(b[2].first == GaloisFieldDict::from_vec(
+                              {1_z, 1_z, 1_z, 1_z, 1_z, 1_z, 1_z}, 2_z));
     REQUIRE(b[2].second == 3_z);
     REQUIRE(b[3].first
             == GaloisFieldDict::from_vec(
-                {1_z, 1_z, 0_z, 1_z, 1_z, 0_z, 1_z, 0_z, 1_z, 1_z, 0_z,
-                 1_z, 1_z, 0_z, 0_z, 0_z, 0_z, 0_z, 0_z, 0_z, 0_z, 1_z,
-                 1_z, 0_z, 1_z, 1_z, 0_z, 1_z, 0_z, 1_z, 1_z, 0_z, 1_z,
-                 1_z, 0_z, 0_z, 0_z, 0_z, 0_z, 0_z, 0_z, 0_z, 1_z, 1_z,
-                 0_z, 1_z, 1_z, 0_z, 1_z, 0_z, 1_z, 1_z, 0_z, 1_z, 1_z},
-                2_z));
+                   {1_z, 1_z, 0_z, 1_z, 1_z, 0_z, 1_z, 0_z, 1_z, 1_z, 0_z,
+                    1_z, 1_z, 0_z, 0_z, 0_z, 0_z, 0_z, 0_z, 0_z, 0_z, 1_z,
+                    1_z, 0_z, 1_z, 1_z, 0_z, 1_z, 0_z, 1_z, 1_z, 0_z, 1_z,
+                    1_z, 0_z, 0_z, 0_z, 0_z, 0_z, 0_z, 0_z, 0_z, 1_z, 1_z,
+                    0_z, 1_z, 1_z, 0_z, 1_z, 0_z, 1_z, 1_z, 0_z, 1_z, 1_z},
+                   2_z));
     REQUIRE(b[3].second == 6_z);
     c = d1.gf_ddf_shoup();
     REQUIRE(b == c);
@@ -648,15 +646,14 @@ TEST_CASE("GaloisFieldDict distinct degree factorization : Basic", "[basic]")
     REQUIRE(b[0].first
             == GaloisFieldDict::from_vec({68144_z, 22730_z, 1_z}, 102953_z));
     REQUIRE(b[0].second == 2_z);
-    REQUIRE(
-        b[1].first
-        == GaloisFieldDict::from_vec({84356_z, 88001_z, 52650_z, 68608_z,
-                                      12561_z, 10787_z, 83977_z, 64876_z, 1_z},
-                                     102953_z));
+    REQUIRE(b[1].first == GaloisFieldDict::from_vec({84356_z, 88001_z, 52650_z,
+                                                     68608_z, 12561_z, 10787_z,
+                                                     83977_z, 64876_z, 1_z},
+                                                    102953_z));
     REQUIRE(b[1].second == 4_z);
-    REQUIRE(b[2].first
-            == GaloisFieldDict::from_vec(
-                {92335_z, 94508_z, 84569_z, 95022_z, 15347_z, 1_z}, 102953_z));
+    REQUIRE(b[2].first == GaloisFieldDict::from_vec({92335_z, 94508_z, 84569_z,
+                                                     95022_z, 15347_z, 1_z},
+                                                    102953_z));
     REQUIRE(b[2].second == 5_z);
     c = d1.gf_ddf_shoup();
     REQUIRE(b == c);
