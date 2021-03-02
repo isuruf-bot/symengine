@@ -49,11 +49,13 @@ namespace SymEngine
  *   the dictionary.
  */
 Add::Add(const RCP<const Number> &coef, umap_basic_num &&dict)
-    : coef_{coef}, dict_{std::move(dict)} {
-                       SYMENGINE_ASSIGN_TYPEID()
-                           SYMENGINE_ASSERT(is_canonical(coef, dict_))}
+    : coef_{coef}, dict_{std::move(dict)}
+{
+    SYMENGINE_ASSIGN_TYPEID()
+    SYMENGINE_ASSERT(is_canonical(coef, dict_))
+}
 
-      hash_t Add::__hash__() const
+hash_t Add::__hash__() const
 {
     hash_t seed = SYMENGINE_ADD, temp;
     hash_combine<Basic>(seed, *coef_);

@@ -150,7 +150,7 @@ public:
  * @param a is a `Basic` object
  * @param b is a `Basic` object
  * @returns `a+b` in its most aproriate form
- * 
+ *
  * @relatesalso Add
  */
 RCP<const Basic> add(const RCP<const Basic> &a, const RCP<const Basic> &b);
@@ -159,7 +159,7 @@ RCP<const Basic> add(const RCP<const Basic> &a, const RCP<const Basic> &b);
  * @brief Sums the elements of a vector
  * @param a is a vector
  * @returns sum of elements of the input vector `a`
- * 
+ *
  * @relatesalso Add
  */
 RCP<const Basic> add(const vec_basic &a);
@@ -169,7 +169,7 @@ RCP<const Basic> add(const vec_basic &a);
  * @param a is the minuend
  * @param b is the subtrahend
  * @returns the difference `a-b`
- * 
+ *
  * @relatesalso Add
  */
 RCP<const Basic> sub(const RCP<const Basic> &a, const RCP<const Basic> &b);
